@@ -19,6 +19,32 @@
 
     <!-- Font CSS -->
     <link rel="stylesheet" href="{% static 'Design/Font/fonts.css' %}">
+
+    <!-- Style CSS -->
+     <style>
+        body {
+            background: white; /* page background */
+            }
+
+        .card {
+            background: #163f63; /* your blue */
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            position: relative;
+        }
+
+        .card::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: white; /* same as body background */
+        border-radius: 50%;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        }
+     </style>
     
 </head>
 <body>
@@ -31,8 +57,12 @@
         </div>
     {% endblock %}
     
+    {% block navbar %}
+        {% include "public/Include/Navbar.html" %}
+    {% endblock %}
+
     {% block content %}
-        <div>
+        <div class="w-full">
 
 
 

@@ -10,6 +10,7 @@
     --color-cyan-500: oklch(71.5% 0.143 215.221);
     --color-sky-100: oklch(95.1% 0.026 236.824);
     --color-sky-800: oklch(44.3% 0.11 240.79);
+    --color-sky-950: oklch(29.3% 0.066 243.157);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-950: oklch(28.2% 0.091 267.935);
     --color-purple-100: oklch(94.6% 0.033 307.174);
@@ -179,6 +180,9 @@
   .static {
     position: static;
   }
+  .m-2 {
+    margin: calc(var(--spacing) * 2);
+  }
   .block {
     display: block;
   }
@@ -191,14 +195,41 @@
   .h-\[10vh\] {
     height: 10vh;
   }
+  .h-\[90v\] {
+    height: 90v;
+  }
+  .h-\[90vh\] {
+    height: 90vh;
+  }
+  .h-\[screen\] {
+    height: screen;
+  }
+  .h-full {
+    height: 100%;
+  }
+  .h-screen {
+    height: 100vh;
+  }
+  .w-1 {
+    width: calc(var(--spacing) * 1);
+  }
   .w-1\/2 {
     width: calc(1 / 2 * 100%);
+  }
+  .w-4 {
+    width: calc(var(--spacing) * 4);
   }
   .w-4\/5 {
     width: calc(4 / 5 * 100%);
   }
   .w-100 {
     width: calc(var(--spacing) * 100);
+  }
+  .w-\[96\%\] {
+    width: 96%;
+  }
+  .w-\[98\%\] {
+    width: 98%;
   }
   .w-\[100px\] {
     width: 100px;
@@ -217,6 +248,9 @@
   }
   .border-collapse {
     border-collapse: collapse;
+  }
+  .transform {
+    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
   }
   .resize {
     resize: both;
@@ -252,11 +286,17 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .bg-blue-950 {
+    background-color: var(--color-blue-950);
+  }
   .bg-purple-100 {
     background-color: var(--color-purple-100);
   }
   .bg-sky-100 {
     background-color: var(--color-sky-100);
+  }
+  .bg-sky-950 {
+    background-color: var(--color-sky-950);
   }
   .bg-linear-to-r {
     --tw-gradient-position: to right;
@@ -264,6 +304,10 @@
       --tw-gradient-position: to right in oklab;
     }
     background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .bg-radial-\[at_25\%_25\%\] {
+    --tw-gradient-position: at 25% 25%;
+    background-image: radial-gradient(var(--tw-gradient-stops,at 25% 25%));
   }
   .from-blue-950 {
     --tw-gradient-from: var(--color-blue-950);
@@ -273,6 +317,10 @@
     --tw-gradient-from: var(--color-cyan-500);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
+  .from-sky-950 {
+    --tw-gradient-from: var(--color-sky-950);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
   .to-blue-500 {
     --tw-gradient-to: var(--color-blue-500);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
@@ -280,6 +328,9 @@
   .to-sky-800 {
     --tw-gradient-to: var(--color-sky-800);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .to-75\% {
+    --tw-gradient-to-position: 75%;
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
@@ -312,6 +363,77 @@
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
   }
+  .\[clip-path\:circle\(0\%_at_50\%_50\%\)\] {
+    clip-path: circle(0% at 50% 50%);
+  }
+  .\[clip-path\:circle\(10\%_at_50\%_50\%\)\] {
+    clip-path: circle(10% at 50% 50%);
+  }
+  .\[clip-path\:circle\(20\%_at_50\%_50\%\)\] {
+    clip-path: circle(20% at 50% 50%);
+  }
+  .\[clip-path\:circle\(50\%_at_0\%_5\%\)\] {
+    clip-path: circle(50% at 0% 5%);
+  }
+  .\[clip-path\:circle\(50\%_at_50\%_50\%\)\] {
+    clip-path: circle(50% at 50% 50%);
+  }
+  .\[clip-path\:circle\(80\%_at_0\%_5\%\)\] {
+    clip-path: circle(80% at 0% 5%);
+  }
+  .\[clip-path\:circle\(80\%_at_10\%_5\%\)\] {
+    clip-path: circle(80% at 10% 5%);
+  }
+  .\[clip-path\:circle\(80\%_at_10\%_10\%\)\] {
+    clip-path: circle(80% at 10% 10%);
+  }
+  .\[clip-path\:circle\(80\%_at_10\%_50\%\)\] {
+    clip-path: circle(80% at 10% 50%);
+  }
+  .\[clip-path\:circle\(80\%_at_20\%_5\%\)\] {
+    clip-path: circle(80% at 20% 5%);
+  }
+  .\[clip-path\:circle\(80\%_at_50\%_5\%\)\] {
+    clip-path: circle(80% at 50% 5%);
+  }
+  .\[clip-path\:circle\(80\%_at_50\%_50\%\)\] {
+    clip-path: circle(80% at 50% 50%);
+  }
+  .\[clip-path\:circle\(100\%_at_0\%_5\%\)\] {
+    clip-path: circle(100% at 0% 5%);
+  }
+  .\[clip-path\:circle\(100\%_at_10\%_10\%\)\] {
+    clip-path: circle(100% at 10% 10%);
+  }
+  .\[clip-path\:circle\(100\%_at_10\%_50\%\)\] {
+    clip-path: circle(100% at 10% 50%);
+  }
+  .\[clip-path\:circle\(100\%_at_50\%_50\%\)\] {
+    clip-path: circle(100% at 50% 50%);
+  }
+  .\[clip-path\:circle\(500\%_at_0\%_5\%\)\] {
+    clip-path: circle(500% at 0% 5%);
+  }
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
 }
 @property --tw-border-style {
   syntax: "*";
@@ -368,6 +490,11 @@
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
       --tw-border-style: solid;
       --tw-gradient-position: initial;
       --tw-gradient-from: #0000;
