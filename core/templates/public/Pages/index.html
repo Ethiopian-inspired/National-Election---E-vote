@@ -6,7 +6,26 @@
 {% block content %}
 <div>
 
-    <h1>Hello World!!</h1>
+    <div class="w-full h-[10vh] bg-sky-100 flex justify-between items-center">
+        <div class="w-1/2 flex justify-center items-center">
+            <ul class="w-4/5 inter_Bold flex justify-start items-center text-xl gap-16">
+                <li>Home</li>
+                <li>Election</li>
+                <li>Parties</li>
+            </ul>
+        </div>
+
+        <div class="w-1/2 flex justify-evenly items-center">
+            <div class="w-4/5 flex justify-end items-center gap-16">
+                <ul class="inter_Bold text-xl">
+                    <li>About Us</li>
+                </ul>
+                <div>
+                    <button class="w-[200px] p-2 bg-linear-to-r from-blue-950 to-sky-800 text-white text-lg inter_Bold rounded-lg">Election Result</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 {% endblock %}
