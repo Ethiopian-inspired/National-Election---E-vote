@@ -162,4 +162,7 @@
   .static {
     position: static;
   }
+  .block {
+    display: block;
+  }
 }
