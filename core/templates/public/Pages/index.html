@@ -6,13 +6,27 @@
 {% block content %}
 <div class="flex justify-center items-center">
 
-    <div class="w-[98%] h-[90vh] bg-radial-[at_25%_25%] from-sky-800 to-sky-950 to-75% card flex flex-col justify-center items-center">
+    <div class="w-[98%] h-[90vh] bg-radial-[at_25%_25%] from-sky-800 to-sky-950 to-75% card flex flex-col justify-start items-center gap-4">
         <div class="w-full h-1/5"></div>
-        <div class="w-full h-4/5 p-10 flex flex-col justify-start items-center gap-4">
+        <div class="w-full h-1/5 p-10 flex flex-col justify-start items-center gap-4">
             <h1 class="text-7xl text-white inter_Bold">E-Vote National Platform</h1>
-            <p class="text-white poppins_light font-light w-2/5 text-center">E-Vote National Platform is a secure electronic voting system built to deliver transparent, efficient, and tamper-resistant national elections through modern digital infrastructure.</p>
+            <p class="text-white text-sm poppins_extralight w-2/5 text-center">E-Vote National Platform is a secure electronic voting system built to deliver transparent, efficient, and tamper-resistant national elections through modern digital infrastructure.</p>
         </div>
-
+        <div class="w-full h-2/5 flex justify-center items-center">
+            <div>
+                <img class="w-[280px]" src="{% static 'Image/Index/FingerPrint.png' %}" alt="">
+            </div>
+            <div class="w-2/5 h-8/10 flex flex-col justify-start items-start gap-4">
+                <h1 class="inter_SemiBold text-6xl text-white">Real-Time Results</h1>
+                <p class="inter_Regular text-sm text-white w-8/10 indent-8">E-Vote National Platform is a secure electronic voting system built to deliver transparent, efficient, and tamper-resistant national elections through modern digital infrastructure.</p>
+                <p class="text-sm text-white">E-Vote National Platform aims to strengthen democratic processes in the digital age</p>
+                <div class="w-4/5 flex justify-center items-center text-white inter_Bold flex justify-center items-center gap-10">
+                    <p>Secure</p>
+                    <p>Transparency</p>
+                    <p>Scalable</p>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

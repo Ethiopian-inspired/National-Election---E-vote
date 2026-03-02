@@ -5,6 +5,20 @@
   font-style: normal;
 }
 
+.inter_SemiBold {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.inter_Regular {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+
 /* Poppins: CSS classes */
 .poppins-thin {
   font-family: "Poppins", sans-serif;
@@ -12,13 +26,13 @@
   font-style: normal;
 }
 
-.poppins-extralight {
+.poppins_extralight {
   font-family: "Poppins", sans-serif;
   font-weight: 200;
   font-style: normal;
 }
 
-.poppins-light {
+.poppins_light {
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   font-style: normal;
