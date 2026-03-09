@@ -7,8 +7,13 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-100: oklch(93.6% 0.032 17.717);
+    --color-green-100: oklch(96.2% 0.044 156.743);
+    --color-sky-100: oklch(95.1% 0.026 236.824);
+    --color-sky-200: oklch(90.1% 0.058 230.902);
     --color-sky-800: oklch(44.3% 0.11 240.79);
     --color-sky-950: oklch(29.3% 0.066 243.157);
+    --color-purple-100: oklch(94.6% 0.033 307.174);
     --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -195,6 +200,9 @@
   .flex {
     display: flex;
   }
+  .grid {
+    display: grid;
+  }
   .h-1\/5 {
     height: calc(1 / 5 * 100%);
   }
@@ -204,14 +212,29 @@
   .h-2\/5 {
     height: calc(2 / 5 * 100%);
   }
+  .h-7\/10 {
+    height: calc(7 / 10 * 100%);
+  }
   .h-8\/10 {
     height: calc(8 / 10 * 100%);
   }
   .h-\[10vh\] {
     height: 10vh;
   }
+  .h-\[20vh\] {
+    height: 20vh;
+  }
   .h-\[25vh\] {
     height: 25vh;
+  }
+  .h-\[35vh\] {
+    height: 35vh;
+  }
+  .h-\[40vh\] {
+    height: 40vh;
+  }
+  .h-\[45vh\] {
+    height: 45vh;
   }
   .h-\[50vh\] {
     height: 50vh;
@@ -228,14 +251,20 @@
   .h-full {
     height: 100%;
   }
-  .h-screen {
-    height: 100vh;
-  }
   .w-1\/2 {
     width: calc(1 / 2 * 100%);
   }
   .w-2\/5 {
     width: calc(2 / 5 * 100%);
+  }
+  .w-2\/6 {
+    width: calc(2 / 6 * 100%);
+  }
+  .w-3\/5 {
+    width: calc(3 / 5 * 100%);
+  }
+  .w-3\/9 {
+    width: calc(3 / 9 * 100%);
   }
   .w-4\/5 {
     width: calc(4 / 5 * 100%);
@@ -246,8 +275,20 @@
   .w-5\/10 {
     width: calc(5 / 10 * 100%);
   }
+  .w-7\/10 {
+    width: calc(7 / 10 * 100%);
+  }
   .w-8\/10 {
     width: calc(8 / 10 * 100%);
+  }
+  .w-9\/10 {
+    width: calc(9 / 10 * 100%);
+  }
+  .w-\[30\%\] {
+    width: 30%;
+  }
+  .w-\[50\%\] {
+    width: 50%;
   }
   .w-\[98\%\] {
     width: 98%;
@@ -266,6 +307,15 @@
   }
   .list-disc {
     list-style-type: disc;
+  }
+  .grid-cols-\[1fr_1fr_1fr\] {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .grid-cols-\[30\%_1fr_30\%\] {
+    grid-template-columns: 30% 1fr 30%;
+  }
+  .grid-rows-\[30\%_1fr_30\%\] {
+    grid-template-rows: 30% 1fr 30%;
   }
   .flex-col {
     flex-direction: column;
@@ -312,6 +362,21 @@
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
+  .bg-green-100 {
+    background-color: var(--color-green-100);
+  }
+  .bg-purple-100 {
+    background-color: var(--color-purple-100);
+  }
+  .bg-red-100 {
+    background-color: var(--color-red-100);
+  }
+  .bg-sky-100 {
+    background-color: var(--color-sky-100);
+  }
+  .bg-sky-200 {
+    background-color: var(--color-sky-200);
+  }
   .bg-linear-to-r {
     --tw-gradient-position: to right;
     @supports (background-image: linear-gradient(in lab, red, red)) {
@@ -345,11 +410,17 @@
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
+  }
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
   .p-5 {
     padding: calc(var(--spacing) * 5);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
   }
   .p-10 {
     padding: calc(var(--spacing) * 10);
