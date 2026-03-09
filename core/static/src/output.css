@@ -212,6 +212,12 @@
   .h-2\/5 {
     height: calc(2 / 5 * 100%);
   }
+  .h-4\/10 {
+    height: calc(4 / 10 * 100%);
+  }
+  .h-5\/10 {
+    height: calc(5 / 10 * 100%);
+  }
   .h-7\/10 {
     height: calc(7 / 10 * 100%);
   }
@@ -323,6 +329,9 @@
   .items-center {
     align-items: center;
   }
+  .items-end {
+    align-items: flex-end;
+  }
   .items-start {
     align-items: flex-start;
   }
@@ -377,6 +386,9 @@
   .bg-sky-200 {
     background-color: var(--color-sky-200);
   }
+  .bg-white {
+    background-color: var(--color-white);
+  }
   .bg-linear-to-r {
     --tw-gradient-position: to right;
     @supports (background-image: linear-gradient(in lab, red, red)) {
@@ -424,6 +436,12 @@
   }
   .p-10 {
     padding: calc(var(--spacing) * 10);
+  }
+  .pb-4 {
+    padding-bottom: calc(var(--spacing) * 4);
+  }
+  .pb-6 {
+    padding-bottom: calc(var(--spacing) * 6);
   }
   .text-center {
     text-align: center;
