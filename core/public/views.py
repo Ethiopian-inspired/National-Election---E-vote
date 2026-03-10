@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def index (request):
     return render (request, 'public/Pages/index.html')
+
+def election (request):
+    return render (request, 'public/Pages/SubPages/Election.html')
