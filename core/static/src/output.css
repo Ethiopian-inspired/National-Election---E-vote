@@ -194,6 +194,9 @@
   .static {
     position: static;
   }
+  .m-0 {
+    margin: calc(var(--spacing) * 0);
+  }
   .block {
     display: block;
   }
@@ -419,6 +422,9 @@
     --tw-mask-top-to-position: 90%;
     --tw-mask-bottom: linear-gradient(to bottom, var(--tw-mask-bottom-from-color) var(--tw-mask-bottom-from-position), var(--tw-mask-bottom-to-color) var(--tw-mask-bottom-to-position));
     --tw-mask-bottom-to-position: 90%;
+  }
+  .p-0 {
+    padding: calc(var(--spacing) * 0);
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
