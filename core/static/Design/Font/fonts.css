@@ -1,3 +1,9 @@
+.inter_ExtraBold {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+}
 .inter_Bold {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
