@@ -7,9 +7,11 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-sky-100: oklch(95.1% 0.026 236.824);
     --color-sky-800: oklch(44.3% 0.11 240.79);
     --color-sky-950: oklch(29.3% 0.066 243.157);
     --color-gray-300: oklch(87.2% 0.01 258.338);
+    --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-white: #fff;
     --spacing: 0.25rem;
     --text-sm: 0.875rem;
@@ -32,6 +34,7 @@
     --text-6xl--line-height: 1;
     --text-7xl: 4.5rem;
     --text-7xl--line-height: 1;
+    --radius-sm: 0.25rem;
     --radius-lg: 0.5rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
@@ -225,6 +228,9 @@
   .h-\[35vh\] {
     height: 35vh;
   }
+  .h-\[40px\] {
+    height: 40px;
+  }
   .h-\[50vh\] {
     height: 50vh;
   }
@@ -239,6 +245,15 @@
   }
   .h-\[90vh\] {
     height: 90vh;
+  }
+  .h-\[400px\] {
+    height: 400px;
+  }
+  .h-\[500px\] {
+    height: 500px;
+  }
+  .h-\[550px\] {
+    height: 550px;
   }
   .h-full {
     height: 100%;
@@ -267,8 +282,17 @@
   .w-\[20\%\] {
     width: 20%;
   }
+  .w-\[40\%\] {
+    width: 40%;
+  }
+  .w-\[50\%\] {
+    width: 50%;
+  }
   .w-\[60\%\] {
     width: 60%;
+  }
+  .w-\[90\%\] {
+    width: 90%;
   }
   .w-\[98\%\] {
     width: 98%;
@@ -339,12 +363,30 @@
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
+  .rounded-sm {
+    border-radius: var(--radius-sm);
+  }
   .rounded-t-\[30px\] {
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
   }
+  .bg-sky-100 {
+    background-color: var(--color-sky-100);
+  }
   .bg-white {
     background-color: var(--color-white);
+  }
+  .bg-white\/20 {
+    background-color: color-mix(in srgb, #fff 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+    }
+  }
+  .bg-white\/40 {
+    background-color: color-mix(in srgb, #fff 40%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 40%, transparent);
+    }
   }
   .bg-linear-to-r {
     --tw-gradient-position: to right;
@@ -418,6 +460,9 @@
   .pb-6 {
     padding-bottom: calc(var(--spacing) * 6);
   }
+  .pl-2 {
+    padding-left: calc(var(--spacing) * 2);
+  }
   .text-center {
     text-align: center;
   }
@@ -469,6 +514,9 @@
   }
   .text-gray-300 {
     color: var(--color-gray-300);
+  }
+  .text-gray-400 {
+    color: var(--color-gray-400);
   }
   .text-sky-800 {
     color: var(--color-sky-800);
