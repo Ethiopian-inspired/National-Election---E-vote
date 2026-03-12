@@ -7,3 +7,6 @@ def index (request):
 
 def election (request):
     return render (request, 'public/Pages/SubPages/Election.html')
+
+def signup (request):
+    return render (request, 'public/Pages/SubPages/Log/SignUp.html')
