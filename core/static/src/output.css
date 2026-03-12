@@ -7,11 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-300: oklch(80.8% 0.114 19.571);
-    --color-red-500: oklch(63.7% 0.237 25.331);
-    --color-green-300: oklch(87.1% 0.15 154.449);
-    --color-sky-100: oklch(95.1% 0.026 236.824);
-    --color-sky-300: oklch(82.8% 0.111 230.318);
     --color-sky-800: oklch(44.3% 0.11 240.79);
     --color-sky-950: oklch(29.3% 0.066 243.157);
     --color-gray-300: oklch(87.2% 0.01 258.338);
@@ -38,7 +33,6 @@
     --text-7xl: 4.5rem;
     --text-7xl--line-height: 1;
     --radius-lg: 0.5rem;
-    --radius-2xl: 1rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -195,9 +189,6 @@
   .static {
     position: static;
   }
-  .m-0 {
-    margin: calc(var(--spacing) * 0);
-  }
   .block {
     display: block;
   }
@@ -225,9 +216,6 @@
   .h-8\/10 {
     height: calc(8 / 10 * 100%);
   }
-  .h-9\/10 {
-    height: calc(9 / 10 * 100%);
-  }
   .h-\[10vh\] {
     height: 10vh;
   }
@@ -246,14 +234,8 @@
   .h-\[80vh\] {
     height: 80vh;
   }
-  .h-\[85vh\] {
-    height: 85vh;
-  }
   .h-\[87vh\] {
     height: 87vh;
-  }
-  .h-\[88vh\] {
-    height: 88vh;
   }
   .h-\[90vh\] {
     height: 90vh;
@@ -285,17 +267,8 @@
   .w-\[20\%\] {
     width: 20%;
   }
-  .w-\[30\%\] {
-    width: 30%;
-  }
-  .w-\[40\%\] {
-    width: 40%;
-  }
   .w-\[60\%\] {
     width: 60%;
-  }
-  .w-\[90\%\] {
-    width: 90%;
   }
   .w-\[98\%\] {
     width: 98%;
@@ -366,29 +339,9 @@
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
-  .rounded-t-2xl {
-    border-top-left-radius: var(--radius-2xl);
-    border-top-right-radius: var(--radius-2xl);
-  }
   .rounded-t-\[30px\] {
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
-  }
-  .rounded-t-lg {
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
-  }
-  .bg-green-300 {
-    background-color: var(--color-green-300);
-  }
-  .bg-red-300 {
-    background-color: var(--color-red-300);
-  }
-  .bg-sky-100 {
-    background-color: var(--color-sky-100);
-  }
-  .bg-sky-300 {
-    background-color: var(--color-sky-300);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -431,13 +384,6 @@
     --tw-mask-top-from-position: 70%;
     --tw-mask-bottom: linear-gradient(to bottom, var(--tw-mask-bottom-from-color) var(--tw-mask-bottom-from-position), var(--tw-mask-bottom-to-color) var(--tw-mask-bottom-to-position));
     --tw-mask-bottom-from-position: 70%;
-  }
-  .mask-t-from-50\% {
-    mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
-    mask-composite: intersect;
-    --tw-mask-linear: var(--tw-mask-left), var(--tw-mask-right), var(--tw-mask-bottom), var(--tw-mask-top);
-    --tw-mask-top: linear-gradient(to top, var(--tw-mask-top-from-color) var(--tw-mask-top-from-position), var(--tw-mask-top-to-color) var(--tw-mask-top-to-position));
-    --tw-mask-top-from-position: 50%;
   }
   .mask-y-to-90\% {
     mask-image: var(--tw-mask-linear), var(--tw-mask-radial), var(--tw-mask-conic);
@@ -523,9 +469,6 @@
   }
   .text-gray-300 {
     color: var(--color-gray-300);
-  }
-  .text-red-500 {
-    color: var(--color-red-500);
   }
   .text-sky-800 {
     color: var(--color-sky-800);
