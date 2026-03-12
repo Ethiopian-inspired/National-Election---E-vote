@@ -13,6 +13,21 @@
     </div>
 </div>
 
+<div class="fixed top-5 right-5 space-y-3 z-50">
+    
+        <div class="w-[400px] h-[200px] px-4 py-3 rounded-lg shadow-md text-white flex flex-col justify-center items-center gap-4
+            {% if message.tags == 'success' %} bg-sky-800 shadow-sm
+            {% elif message.tags == 'error' %} bg-red-500
+            {% elif message.tags == 'warning' %} bg-yellow-500
+            {% elif message.tags == 'info' %} bg-blue-500
+            {% endif %}
+        ">
+            <p class="inter_ExtraBold text-4xl text-white">yes</p>
+            <p class="w-[80%] text-center text-xs text-white indent-2">E-Vote National Platform is a secure electronic voting system built to deliver transparent, efficient, and tamper-resistant national elections through modern digital infrastructure.</p>
+        </div>
+    
+</div>
+
 {% block content %}
 <div class="w-full h-[90vh] flex flex-col justify-end items-center">
     <div class="w-[98%] h-[87vh] rounded-t-[30px] bg-radial-[at_25%_25%] from-sky-800 to-sky-950 to-75% flex flex-col justify-start items-center gap-4">
