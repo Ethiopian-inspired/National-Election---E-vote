@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import SignUp
+from django.contrib import messages
 
 # Create your views here.
 
@@ -16,6 +17,8 @@ def signup (request):
     if request.method == 'POST':
         if SignForm.is_valid():
             SignForm.save()
+            messages.success (request, 'Register Valied!')
+            
             return redirect ('Election')
     
     context = {
