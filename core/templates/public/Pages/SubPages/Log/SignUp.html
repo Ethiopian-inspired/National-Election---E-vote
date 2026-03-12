@@ -22,15 +22,31 @@
             </div>
 
             <div class="w-1/2 flex justify-center items-center">
-                <div class="w-[50%] h-[550px] bg-white/40">
+                <div class="w-[50%] h-[550px] bg-sky-100 rounded-lg">
                     <div>
                         <p>SIGN UP HERE</p>
                         <p>Verify What You Are</p>
                     </div>
 
-                    <div class="w-[90%] flex flex-col justify-center items-center">
+                    <form method="post" class="flex flex-col justify-center items-center">
+                        <div class="w-[90%] flex flex-col justify-center items-center gap-2">
+                            {% csrf_token %}
+                            <div class="flex justify-center items-center gap-4">
+                                {{ form.first_name }}
+                                {{ form.last_name }}
+                            </div>
 
-                    </div>
+                            <div class="w-full flex flex-col justify-center items-center gap-2">
+                                {{ form.username }}
+                                {{ form.email }}
+                            </div>
+
+                            <div class="flex justify-center items-center gap-4">
+                                {{ form.password1 }}
+                                {{ form.password2 }}
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
