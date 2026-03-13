@@ -105,10 +105,11 @@
                 <div class="w-2/5 flex justify-center items-center">
                     {% if user.is_authenticated %}
                         <div>
-                            <p>Alazar Bekele</p>
-                            <p>Ethiopan, Yeka</p>
+                            <p class="inter_Bold">{{ request.user.first_name }} {{ user.last_name }}</p>
+                            <p class="inter_Regular text-gray-400">Ethiopan, Yeka</p>
                         </div>
                     {% else %}
+                        <p class="inter_Bold">None Name</p>
                     {% endif %}
                 </div>
             </div>
