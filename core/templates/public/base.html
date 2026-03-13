@@ -78,16 +78,17 @@
     {% endif %}
 
     {% block navbar %}
-        <div class="w-full h-[10vh] flex justify-between items-center">
-            <div class="w-3/10 flex justify-center items-center">
-                <ul class="w-4/5 inter_Bold flex justify-start items-center text-xl gap-16">
+        <div class="w-full grid grid-cols-[30%_1fr_30%] h-[10vh] flex justify-between items-center">
+            <div class="w-full flex justify-center items-center">
+                <ul class="w-4/5 inter_Bold flex justify-start items-center text-xl gap-10">
                     <li>Home</li>
                     <a href="{% url 'Election' %}"><li>Election</li></a>
                     <li>Parties</li>
+                    <li>About Us</li>
                 </ul>
             </div>
 
-            <div class="w-4/10 h-full flex justify-center items-center">
+            <div class="w-full h-full flex justify-center items-center">
                 {% block NavCenter %}
                     <div>
                         
@@ -95,14 +96,20 @@
                 {% endblock %}
             </div>
 
-            <div class="w-3/10 flex justify-evenly items-center">
-                <div class="w-4/5 flex justify-end items-center gap-16">
-                    <ul class="inter_Bold text-xl">
-                        <li>About Us</li>
-                    </ul>
+            <div class="w-full flex justify-center items-center">
+                <div class="w-3/5 flex justify-center items-center gap-6">
                     <div>
                         <button class="w-[200px] p-2 bg-linear-to-r from-sky-950 to-sky-800 text-white text-lg inter_Bold rounded-lg">Election Result</button>
                     </div>
+                </div>
+                <div class="w-2/5 flex justify-center items-center">
+                    {% if user.is_authenticated %}
+                        <div>
+                            <p>Alazar Bekele</p>
+                            <p>Ethiopan, Yeka</p>
+                        </div>
+                    {% else %}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -115,6 +122,5 @@
 
         </div>
     {% endblock %}
-
 </body>
 </html>
