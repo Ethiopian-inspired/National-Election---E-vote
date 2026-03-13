@@ -32,3 +32,16 @@ class SignUp (UserCreationForm):
         'class' : 'w-full h-[50px] border-b-2 border-gray-600/15 focus:border-indigo-600 focus:outline-hidden inter_SemiBold placeholder-gray-400/80',
         'placeholder' : 'Confirm Password'
     }))
+
+
+class SignIn (forms.Form):
+
+    username = forms.CharField (max_length=20, widget=forms.TextInput(attrs={
+        'class' : 'w-full h-[50px] border-b-2 border-gray-600/15 focus:border-indigo-600 focus:outline-hidden inter_SemiBold placeholder-gray-400/80',
+        'placeholder' : 'Username'
+    }))
+
+    password = forms.CharField (max_length=10, widget=forms.TextInput(attrs={
+        'class' : 'w-full h-[50px] border-b-2 border-gray-600/15 focus:border-indigo-600 focus:outline-hidden inter_SemiBold placeholder-gray-400/80',
+        'placeholder' : 'Password'
+    }))

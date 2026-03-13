@@ -46,8 +46,35 @@
                             <h1>Hello</h1>
                         </div>
 
-                        <div class="w-1/2">
+                        <div class="w-1/2 flex justify-center items-center">
+                            <div class="w-[50%] h-[550px] bg-sky-100 rounded-lg">
+                                <div class="p-4 w-full flex flex-col justify-center items-center">
+                                    <p class="w-1/2 text-3xl text-center inter_ExtraBold">LOGIN HERE</p>
+                                    <p class="w-1/2 text-lg inter_Bold text-center">Verify Who You Are</p>
+                                </div>
 
+                                <form method="post" class="flex flex-col justify-center items-center gap-10">
+                                    <div class="w-[90%] flex flex-col justify-center items-center gap-2">
+                                        {% csrf_token %}
+                                    </div>
+
+                                    <div>
+                                        {{ signin.username }}
+                                        {{ signin.password }}
+                                    </div>
+
+                                    <div class="w-full flex flex-col justify-center items-center gap-10">
+                                        <div class="flex flex-col justify-center items-center gap-2">
+                                            <button type="submit" class="w-[200px] text-2xl p-3 inter_Bold text-white bg-sky-800 rounded-sm">Login</button>
+                                            <p class="w-[80%] text-center text-xs text-gray-400 indent-2">E-Vote National Platform is a secure electronic voting system built to deliver transparent, efficient, and tamper-resistant national elections through modern digital infrastructure.</p>
+                                        </div>
+
+                                        <div>
+                                            <p class="inter_Bold overline text-xs">I don’t have an account</p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
