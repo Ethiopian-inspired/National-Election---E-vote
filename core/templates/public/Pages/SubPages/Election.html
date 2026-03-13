@@ -50,12 +50,17 @@
                             <div class="w-[50%] h-[550px] bg-sky-100 rounded-lg">
                                 <div class="p-4 w-full flex flex-col justify-center items-center">
                                     <p class="w-1/2 text-3xl text-center inter_ExtraBold">LOGIN HERE</p>
-                                    <p class="w-1/2 text-lg inter_Bold text-center">Verify What You Are</p>
+                                    <p class="w-1/2 text-lg inter_Bold text-center">Verify Who You Are</p>
                                 </div>
 
                                 <form method="post" class="flex flex-col justify-center items-center gap-10">
                                     <div class="w-[90%] flex flex-col justify-center items-center gap-2">
                                         {% csrf_token %}
+                                    </div>
+
+                                    <div>
+                                        {{ signin.username }}
+                                        {{ signin.password }}
                                     </div>
 
                                     <div class="w-full flex flex-col justify-center items-center gap-10">

@@ -43,5 +43,5 @@ class SignIn (forms.Form):
 
     password = forms.CharField (max_length=10, widget=forms.TextInput(attrs={
         'class' : 'w-full h-[50px] border-b-2 border-gray-600/15 focus:border-indigo-600 focus:outline-hidden inter_SemiBold placeholder-gray-400/80',
-        'placeholder' : 'Username'
+        'placeholder' : 'Password'
     }))
