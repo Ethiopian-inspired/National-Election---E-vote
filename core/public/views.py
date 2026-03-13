@@ -5,11 +5,12 @@ from .forms import (
 )
 from django.contrib import messages
 from django.contrib.auth.models import User
-
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required (login_url='/signup/')
 def index (request):
     return render (request, 'public/Pages/index.html')
 
