@@ -50,3 +50,7 @@ def signup (request):
         'form' : SignForm
     }
     return render (request, 'public/Pages/SubPages/Log/SignUp.html', context=context)
+
+def logout_request (request):
+    logout(request)
+    return redirect ('Signup')
