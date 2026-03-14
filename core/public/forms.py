@@ -59,12 +59,22 @@ class SignIn (forms.Form):
 
 
 # Save National Id
-class National_ID (UserCreationForm):
-    class Meta:
-        models = User
-        fields = ['national_id']
+class National_ID (forms.ModelForm):
 
     national_id = forms.CharField (max_length=16, widget=forms.TextInput.attrs({
         'class' : 'w-full h-[50px] border-b-2 border-gray-600/15 focus:border-indigo-600 focus:outline-hidden inter_SemiBold placeholder-gray-400/80',
         'placeholder' : 'xxxx xxxx xxxx xxxx'
     }))
+
+    class Meta:
+        models = User
+        fields = ['national_id']
+    
+    def save(self, commit=True):
+        user = super().save(commit=True)
+
+        national_id = self.cleaned_data["national_id"]
+        user.profile.national_id = national_id
+        user.profile.save()
+
+        return user
