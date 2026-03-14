@@ -61,7 +61,7 @@ class SignIn (forms.Form):
 # Save National Id
 class National_ID (forms.ModelForm):
 
-    national_id = forms.CharField (max_length=16, widget=forms.TextInput.attrs({
+    national_id = forms.CharField (max_length=16, widget=forms.TextInput(attrs={
         'class' : 'w-full h-[50px] border-b-2 border-gray-600/15 focus:border-indigo-600 focus:outline-hidden inter_SemiBold placeholder-gray-400/80',
         'placeholder' : 'xxxx xxxx xxxx xxxx'
     }))
