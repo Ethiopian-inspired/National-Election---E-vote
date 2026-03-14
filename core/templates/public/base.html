@@ -97,20 +97,26 @@
             </div>
 
             <div class="w-full flex justify-center items-center">
-                <div class="w-3/5 flex justify-center items-center gap-6">
-                    <div>
-                        <button class="w-[200px] p-2 bg-linear-to-r from-sky-950 to-sky-800 text-white text-lg inter_Bold rounded-lg">Election Result</button>
-                    </div>
-                </div>
-                <div class="w-2/5 flex justify-center items-center">
-                    {% if user.is_authenticated %}
+                <div class="w-[90%] flex justify-between items-center">
+                    <div class="w-[50%] flex justify-between items-center gap-6">
                         <div>
-                            <p class="inter_Bold">{{ request.user.first_name }} {{ user.last_name }}</p>
-                            <p class="inter_Regular text-gray-400">Ethiopan, Yeka</p>
+                            <button class="w-[200px] p-2 bg-linear-to-r from-sky-950 to-sky-800 text-white text-lg inter_Bold rounded-lg">Election Result</button>
                         </div>
-                    {% else %}
-                        <p class="inter_Bold">None Name</p>
-                    {% endif %}
+                    </div>
+                    <div class="w-[50%] flex justify-evenly items-center">
+                        {% if user.is_authenticated %}
+                            <div>
+                                <p class="inter_Bold">{{ request.user.first_name }} {{ user.last_name }}</p>
+                                <p class="inter_Regular text-gray-400">Ethiopan, Yeka</p>
+                            </div>
+
+                            <div>
+                                <p class="inter_Bold text-base">Logout</p>
+                            </div>
+                        {% else %}
+                            <p class="inter_Bold">None Name</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
