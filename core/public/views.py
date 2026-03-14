@@ -40,12 +40,6 @@ def signup (request):
 
     if request.method == 'POST':
         if SignForm.is_valid():
-
-            username = SignForm.cleaned_data['username']
-
-            if User.objects.filter(username=username).exists():
-                messages.error(request, "Username is Already Taken!!")
-                return redirect ('Signup')
             
             SignForm.save()
             messages.success (request, 'Register Valied!')
@@ -56,3 +50,7 @@ def signup (request):
         'form' : SignForm
     }
     return render (request, 'public/Pages/SubPages/Log/SignUp.html', context=context)
+
+def logout_request (request):
+    logout(request)
+    return redirect ('Signup')
