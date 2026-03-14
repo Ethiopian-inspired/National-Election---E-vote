@@ -45,7 +45,6 @@ class SignUp (UserCreationForm):
         'placeholder' : 'Confirm Password'
     }))
 
-
 class SignIn (forms.Form):
 
     username = forms.CharField (max_length=20, widget=forms.TextInput(attrs={
@@ -56,4 +55,16 @@ class SignIn (forms.Form):
     password = forms.CharField (max_length=10, widget=forms.PasswordInput(attrs={
         'class' : 'w-full h-[50px] border-b-2 border-gray-600/15 focus:border-indigo-600 focus:outline-hidden inter_SemiBold placeholder-gray-400/80',
         'placeholder' : 'Password'
+    }))
+
+
+# Save National Id
+class National_ID (UserCreationForm):
+    class Meta:
+        models = User
+        fields = ['national_id']
+
+    national_id = forms.CharField (max_length=16, widget=forms.TextInput.attrs({
+        'class' : 'w-full h-[50px] border-b-2 border-gray-600/15 focus:border-indigo-600 focus:outline-hidden inter_SemiBold placeholder-gray-400/80',
+        'placeholder' : 'xxxx xxxx xxxx xxxx'
     }))
