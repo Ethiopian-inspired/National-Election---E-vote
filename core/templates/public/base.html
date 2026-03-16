@@ -91,12 +91,20 @@
                         </button>
 
                         <!-- Dropdown -->
-                        <div class="hidden group-hover:block absolute right-0 p-1 w-40 bg-white rounded-lg shadow-lg z-60">
+                        <div class="hidden group-hover:block absolute right-0 p-1 w-40 bg-white rounded-lg shadow-xl z-60 text-sm">
 
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_staff %}
                                     <a href="#" class="block px-4 py-2 bg-sky-800 text-white hover:bg-sky-700">
                                         Admin Panel
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                            
+                            {% if request.user.is_authenticated %}
+                                {% if not request.user.is_staff %}
+                                    <a href="{% url 'Election' %}" class="block px-4 py-2 bg-sky-800 text-white hover:bg-sky-700">
+                                        Election Contest
                                     </a>
                                 {% endif %}
                             {% endif %}
