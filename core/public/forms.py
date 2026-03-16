@@ -86,6 +86,10 @@ class National_ID (forms.ModelForm):
 
 class Comptition_request (forms.ModelForm):
 
+    class Meta:
+        model = Comptition_Request_model
+        fields = "__all__"
+
     party_nik_name = forms.CharField (max_length=5, widget=forms.TextInput(attrs={
         'class' : 'border'
     }))
@@ -109,7 +113,3 @@ class Comptition_request (forms.ModelForm):
     party_info_PDF = forms.FileField (widget=forms.ClearableFileInput(attrs={
         'class' : 'border'
     }))
-
-    class Meta:
-        models = Comptition_Request_model
-        fields = '__all__'
