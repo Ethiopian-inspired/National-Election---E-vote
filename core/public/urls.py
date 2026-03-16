@@ -3,7 +3,8 @@ from .views import (
     index,
     election,
     signup,
-    logout_request
+    logout_request,
+    compition_request
 )
 
 from django.contrib.auth import views as auth_views
@@ -13,6 +14,7 @@ urlpatterns = [
     path ('election/', election, name='Election'),
     path ('signup/', signup, name='Signup'),
     path ('logout/', logout_request, name='Logout'),
+    path ('compitition_request/', compition_request, name='Compition Request'),
 
     path (
         'passowrd-reset/',

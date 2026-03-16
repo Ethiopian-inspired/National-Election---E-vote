@@ -54,3 +54,6 @@ def signup (request):
 def logout_request (request):
     logout(request)
     return redirect ('Signup')
+
+def compition_request (request):
+    return render (request, 'public/Pages/Comp-page/compition-request-page.html')
