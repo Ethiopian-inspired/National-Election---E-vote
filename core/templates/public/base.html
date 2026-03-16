@@ -80,11 +80,46 @@
     {% block navbar %}
         <div class="w-full grid grid-cols-[30%_1fr_30%] h-[10vh] flex justify-between items-center">
             <div class="w-full flex justify-center items-center">
-                <ul class="w-4/5 inter_Bold flex justify-start items-center text-xl gap-10">
-                    <li>Home</li>
-                    <a href="{% url 'Election' %}"><li>Election</li></a>
-                    <li>Parties</li>
-                    <li>About Us</li>
+                <ul class="w-4/5 inter_Bold flex justify-start items-center text-lg gap-10">
+                    <a href="" class="block px-4 py-2 hover:bg-gray-100 transform hover:scale-110 transition duration-300"><li>Home</li></a>
+                    <a href="{% url 'Election' %}" class="block px-4 py-2 hover:bg-gray-100 transform hover:scale-110 transition duration-300"><li>About Us</li></a>
+                    <div class="relative inline-block text-left group">
+
+                        <!-- Button -->
+                        <button class="bg-gray-800 text-white px-4 py-2 rounded-md">
+                            Menu
+                        </button>
+
+                        <!-- Dropdown -->
+                        <div class="hidden group-hover:block absolute right-0 p-1 w-40 bg-white rounded-lg shadow-xl z-60 text-sm">
+
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff %}
+                                    <a href="#" class="block px-4 py-2 bg-sky-800 text-white hover:bg-sky-700">
+                                        Admin Panel
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                            
+                            {% if request.user.is_authenticated %}
+                                {% if not request.user.is_staff %}
+                                    <a href="{% url 'Election' %}" class="block px-4 py-2 bg-sky-800 text-white hover:bg-sky-700">
+                                        Election Contest
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+
+                            <a href="{% url 'Election' %}" class="block px-4 py-2 hover:bg-gray-100">
+                                Election
+                            </a>
+
+                            <a href="{% url 'Election' %}" class="block px-4 py-2 hover:bg-gray-100">
+                                Parties
+                            </a>
+
+                        </div>
+
+                    </div>
                 </ul>
             </div>
 
