@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import (
     SignUp,
-    SignIn
+    SignIn,
+    Comptition_request
 )
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -56,4 +57,17 @@ def logout_request (request):
     return redirect ('Signup')
 
 def compition_request (request):
-    return render (request, 'public/Pages/Comp-page/compition-request-page.html')
+
+    ComptitionForm = Comptition_request (request.POST or None)
+
+    if request.method == 'POST':
+        if ComptitionForm.is_valid ():
+
+            ComptitionForm.save()
+            messages.success (request, "Your Information is deliverd!!")
+            return redirect ('Index')
+    context = {
+        'Comptition' : ComptitionForm
+    }
+
+    return render (request, 'public/Pages/Comp-page/compition-request-page.html', context=context)
