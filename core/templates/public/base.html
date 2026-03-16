@@ -80,11 +80,29 @@
     {% block navbar %}
         <div class="w-full grid grid-cols-[30%_1fr_30%] h-[10vh] flex justify-between items-center">
             <div class="w-full flex justify-center items-center">
-                <ul class="w-4/5 inter_Bold flex justify-start items-center text-xl gap-10">
+                <ul class="w-4/5 inter_Bold flex justify-start items-center text-lg gap-6">
                     <li>Home</li>
-                    <a href="{% url 'Election' %}"><li>Election</li></a>
                     <li>Parties</li>
                     <li>About Us</li>
+                    <div class="relative inline-block text-left z-60">
+
+                        <!-- Button -->
+                        <button onclick="toggleDropdown()" 
+                            class="bg-gray-800 text-white px-4 py-2 rounded-md">
+                            Menu
+                        </button>
+
+                        <!-- Dropdown -->
+                        <div id="dropdownMenu" 
+                            class="hidden absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
+
+                            <a href="{% url 'Election' %}" class="block px-4 py-2 hover:bg-gray-100"><li>Election</li></a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Logout</a>
+
+                        </div>
+
+                    </div>
                 </ul>
             </div>
 
@@ -128,6 +146,17 @@
 
 
         </div>
+    {% endblock %}
+
+    {% block script %}
+    <div>
+        <script>
+        function toggleDropdown() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.classList.toggle("hidden");
+        }
+        </script>
+    </div>
     {% endblock %}
 </body>
 </html>
