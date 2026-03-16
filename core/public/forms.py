@@ -2,6 +2,10 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from .models import (
+    Comptition_Request_model
+)
+
 class SignUp (UserCreationForm):
 
     class Meta:
@@ -78,3 +82,34 @@ class National_ID (forms.ModelForm):
         user.profile.save()
 
         return user
+    
+
+class Comptition_request (forms.ModelForm):
+
+    party_nik_name = forms.CharField (max_length=5, widget=forms.TextInput(attrs={
+        'class' : 'border'
+    }))
+
+    party_FullName = forms.CharField (max_length=55, widget=forms.TextInput(attrs={
+        'class' : 'border'
+    }))
+
+    party_chairman_name = forms.CharField (max_length=20, widget=forms.TextInput(attrs={
+        'class' : 'border'
+    }))
+
+    want_lead = forms.CharField (widget=forms.TextInput(attrs={
+        'class' : 'border'
+    }))
+
+    party_discription = forms.Textarea (widget=forms.TextInput(attrs={
+        'class' : 'border'
+    }))
+
+    party_info_PDF = forms.FileInput (widget=forms.ClearableFileInput(attrs={
+        'class' : 'border'
+    }))
+
+    class Meta:
+        models = Comptition_Request_model
+        fields = '__all__'
