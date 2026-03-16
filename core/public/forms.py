@@ -102,11 +102,11 @@ class Comptition_request (forms.ModelForm):
         'class' : 'border'
     }))
 
-    party_discription = forms.Textarea (widget=forms.TextInput(attrs={
+    party_discription = forms.CharField (widget=forms.Textarea(attrs={
         'class' : 'border'
     }))
 
-    party_info_PDF = forms.FileInput (widget=forms.ClearableFileInput(attrs={
+    party_info_PDF = forms.FileField (widget=forms.ClearableFileInput(attrs={
         'class' : 'border'
     }))
 
