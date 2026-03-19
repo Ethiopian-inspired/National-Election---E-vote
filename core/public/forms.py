@@ -6,6 +6,8 @@ from .models import (
     Comptition_Request_model
 )
 
+from . import models
+
 class SignUp (UserCreationForm):
 
     class Meta:
@@ -105,16 +107,16 @@ class Comptition_request (forms.ModelForm):
         'placeholder' : 'Party Chair Man Name'
     }))
 
-    want_lead = forms.CharField (widget=forms.TextInput(attrs={
+    want_lead = forms.ChoiceField (choices=[('', 'Select Area')] + models.PLACES_NAME ,widget=forms.Select(attrs={
         'class' : 'w-full h-[60px] border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 pl-6',
         'placeholder' : 'Strict Area To Chooies'
     }))
 
     party_discription = forms.CharField (widget=forms.Textarea(attrs={
-        'class' : 'w-full border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 pl-6',
+        'class' : 'w-full border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 p-6',
         'placeholder' : 'Discribe Your Party As mach as you can, & idea'
     }))
 
     party_info_PDF = forms.FileField (widget=forms.ClearableFileInput(attrs={
-        'class' : 'w-full h-[60px] border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 pl-6'
+        'class' : 'hidden'
     }))
