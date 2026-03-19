@@ -95,7 +95,7 @@
 
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_staff %}
-                                    <a href="#" class="block px-4 py-2 bg-sky-800 text-white hover:bg-sky-700">
+                                    <a href="{% url 'Admin_Panel' request.user.username %}" class="block px-4 py-2 bg-sky-800 text-white hover:bg-sky-700">
                                         Admin Panel
                                     </a>
                                 {% endif %}

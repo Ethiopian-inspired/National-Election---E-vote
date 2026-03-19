@@ -16,7 +16,7 @@ urlpatterns = [
     path ('signup/', signup, name='Signup'),
     path ('logout/', logout_request, name='Logout'),
     path ('compitition_request/', compition_request, name='Compition Request'),
-    path ('admin-panel/<str: username>', admin_panel, name='Admin Panel'),
+    path ('admin-panel/<str:username>/', admin_panel, name='Admin_Panel'),
     path (
         'passowrd-reset/',
         auth_views.PasswordResetView.as_view(
