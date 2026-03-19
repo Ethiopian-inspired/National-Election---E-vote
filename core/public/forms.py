@@ -91,25 +91,30 @@ class Comptition_request (forms.ModelForm):
         fields = "__all__"
 
     party_nik_name = forms.CharField (max_length=5, widget=forms.TextInput(attrs={
-        'class' : 'border'
+        'class' : 'w-full h-[60px] border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 pl-6',
+        'placeholder' : 'The Abrivation Of Your Party'
     }))
 
     party_FullName = forms.CharField (max_length=55, widget=forms.TextInput(attrs={
-        'class' : 'border'
+        'class' : 'w-full h-[60px] border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 pl-6',
+        'placeholder' : 'Full Name'
     }))
 
     party_chairman_name = forms.CharField (max_length=20, widget=forms.TextInput(attrs={
-        'class' : 'border'
+        'class' : 'w-full h-[60px] border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 pl-6',
+        'placeholder' : 'Party Chair Man Name'
     }))
 
     want_lead = forms.CharField (widget=forms.TextInput(attrs={
-        'class' : 'border'
+        'class' : 'w-full h-[60px] border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 pl-6',
+        'placeholder' : 'Strict Area To Chooies'
     }))
 
     party_discription = forms.CharField (widget=forms.Textarea(attrs={
-        'class' : 'border'
+        'class' : 'w-full border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 pl-6',
+        'placeholder' : 'Discribe Your Party As mach as you can, & idea'
     }))
 
     party_info_PDF = forms.FileField (widget=forms.ClearableFileInput(attrs={
-        'class' : 'border'
+        'class' : 'w-full h-[60px] border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 pl-6'
     }))

@@ -23,28 +23,28 @@
                 <p class="text-2xl inter_Bold text-white">Send your Request Fully</p>
             </div>
 
-            <div>
-                <form method="post">
+            <div class="w-[50%]">
+                <form method="post" class="flex flex-col gap-2">
                     {% csrf_token %}
-                    <div>
-                        <p>{{ Comptition.party_nik_name }}</p>
-                        <p>{{ Comptition.party_FullName }}</p>
+                    <div class="w-full flex justify-center items-center gap-4">
+                        {{ Comptition.party_nik_name }}
+                        {{ Comptition.party_FullName }}
                     </div>
 
                     <div>
-                        <p>{{ Comptition.party_chairman_name }}</p>
+                        {{ Comptition.party_chairman_name }}
                     </div>
 
                     <div>
-                        <p>{{ Comptition.want_lead }}</p>
+                        {{ Comptition.want_lead }}
                     </div>
 
                     <div>
-                        <p>{{ Comptition.party_discription }}</p>
+                        {{ Comptition.party_discription }}
                     </div>
 
                     <div>
-                        <p>{{ Comptition.party_info_PDF }}</p>
+                        {{ Comptition.party_info_PDF }}
                     </div>
                 </form>
             </div>
