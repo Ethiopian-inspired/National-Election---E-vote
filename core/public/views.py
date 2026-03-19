@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth.decorators import user_passes_test
 # Create your views here.
 
 @login_required (login_url='/signup/')
@@ -71,3 +72,10 @@ def compition_request (request):
     }
 
     return render (request, 'public/Pages/Comp-page/compition-request-page.html', context=context)
+
+def is_admin (user):
+    return user.is_staff
+
+@user_passes_test (is_admin)
+def admin_panel (request):
+    return render (request, 'public/Pages/Admin-request/display-request-info.html')
