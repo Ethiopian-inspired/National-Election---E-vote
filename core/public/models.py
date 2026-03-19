@@ -7,6 +7,21 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+# Place Name
+PLACES_NAME = [
+    ('Afar Region', 'Afar Region'),
+    ('Amhara Region', 'Amhara Region'),
+    ('Benishangul-Gumuz Region', 'Benishangul-Gumuz Region'),
+    ('Gambela Region', 'Gambela Region'),
+    ('Harari Region', 'Harari Region'),
+    ('Oromia Region', 'Oromia Region'),
+    ('Somali Region', 'Somali Region'),
+    ('Sidama Region', 'Sidama Region'),
+    ('South West Ethiopia Peoples Region', 'South West Ethiopia Peoples Region'),
+    ('Southern Ethiopia Regional State', 'Southern Ethiopia Regional State'),
+    ('Central Ethiopia Regional State', 'Central Ethiopia Regional State'),
+    ('Tigray Region', 'Tigray Region')
+]
 @receiver(post_save, sender=User)
 def create_profile (sender, instance, created, **kwargs):
     if created:
@@ -19,3 +34,18 @@ class Profile (models.Model):
 
     # National Id Store inside User Profile
     national_id = models.CharField
+
+class Comptition_Request_model (models.Model):
+
+    party_nik_name = models.CharField (max_length=5)
+    party_FullName = models.CharField (max_length=55)
+
+    party_chairman_name = models.CharField (max_length=20)
+
+    want_lead = models.CharField (choices=PLACES_NAME)
+
+    party_discription = models.TextField ()
+    party_info_PDF = models.FileField (upload_to='Parties/PDF/')
+
+    def __str__(self):
+        return self.party_nik_name
