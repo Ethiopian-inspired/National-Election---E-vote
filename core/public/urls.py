@@ -15,7 +15,7 @@ urlpatterns = [
     path ('election/', election, name='Election'),
     path ('signup/', signup, name='Signup'),
     path ('logout/', logout_request, name='Logout'),
-    path ('compitition_request/', compition_request, name='Compition Request'),
+    path ('compitition_request/', compition_request, name='Compition_Request'),
     path ('admin-panel/<str:username>/', admin_panel, name='Admin_Panel'),
     path (
         'passowrd-reset/',
