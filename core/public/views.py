@@ -59,16 +59,16 @@ def logout_request (request):
 
 def compition_request (request):
 
-    ComptitionForm = Comptition_request (request.POST or None, request.FILES or None)
+    form = Comptition_request (request.POST or None, request.FILES or None)
 
-    if request.method == 'POST':
-        if ComptitionForm.is_valid ():
+    
+    if form.is_valid ():
 
-            ComptitionForm.save()
-            messages.success (request, "Your Information is deliverd!!")
-            return redirect ('Index')
+        form.save()
+        messages.success (request, "Your Information is deliverd!!")
+        return redirect ('Index')
     context = {
-        'Comptition' : ComptitionForm
+        'Comptition' : form
     }
 
     return render (request, 'public/Pages/Comp-page/compition-request-page.html', context=context)
