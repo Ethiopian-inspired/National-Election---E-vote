@@ -9,6 +9,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
+from .models import (
+    Comptition_Request_model
+)
+
 from django.contrib.auth.decorators import user_passes_test
 # Create your views here.
 
@@ -78,4 +82,9 @@ def is_admin (user):
 
 @user_passes_test (is_admin)
 def admin_panel (request, username):
-    return render (request, 'public/Pages/Admin-request/display-request-info.html')
+    Request_display = Comptition_Request_model.objects.all()
+
+    context = {
+        'Request_display' : Request_display
+    }
+    return render (request, 'public/Pages/Admin-request/display-request-info.html', context=context)

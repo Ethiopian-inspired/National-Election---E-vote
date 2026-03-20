@@ -8,6 +8,8 @@ from .views import (
     admin_panel
 )
 
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -25,3 +27,6 @@ urlpatterns = [
         name='Password_reset'
     )
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
