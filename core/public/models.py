@@ -42,7 +42,7 @@ class Comptition_Request_model (models.Model):
 
     party_chairman_name = models.CharField (max_length=20)
 
-    want_lead = models.CharField (choices=PLACES_NAME)
+    want_lead = models.CharField (max_length=55 ,choices=PLACES_NAME)
 
     party_discription = models.TextField ()
     party_info_PDF = models.FileField (upload_to='Parties/PDF/')

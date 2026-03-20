@@ -59,7 +59,7 @@ def logout_request (request):
 
 def compition_request (request):
 
-    ComptitionForm = Comptition_request (request.POST or None)
+    ComptitionForm = Comptition_request (request.POST or None, request.FILES or None)
 
     if request.method == 'POST':
         if ComptitionForm.is_valid ():

@@ -118,5 +118,9 @@ class Comptition_request (forms.ModelForm):
     }))
 
     party_info_PDF = forms.FileField (widget=forms.ClearableFileInput(attrs={
-        'class' : 'hidden shadow-sm'
+        'class' : 'w-full border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 p-6 shadow-sm'
+    }))
+
+    party_logo = forms.ImageField (widget=forms.ClearableFileInput(attrs={
+        'class' : 'w-full border-none outline-none bg-sky-50 rounded-lg inter_SemiBold placeholder-gray-400/80 p-6 shadow-sm'
     }))
