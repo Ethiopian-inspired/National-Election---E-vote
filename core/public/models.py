@@ -46,6 +46,7 @@ class Comptition_Request_model (models.Model):
 
     party_discription = models.TextField ()
     party_info_PDF = models.FileField (upload_to='Parties/PDF/')
+    party_logo = models.ImageField (upload_to='Parties_logo/')
 
     def __str__(self):
         return self.party_nik_name
