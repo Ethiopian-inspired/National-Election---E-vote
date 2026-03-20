@@ -27,7 +27,8 @@
                 <form method="post" enctype="multipart/form-data" class="w-full flex justify-center items-start gap-10 p-10 inter_Bold">
                     {% csrf_token %}
                     <div class="w-[50%] flex flex-col gap-2">
-                        <div>
+                        <div class="pt-2">
+                            <p class="pl-4 text-xl">Upload Your Party Logo</p>
                             {{ Comptition.party_logo }}
                         </div>
                         
@@ -44,7 +45,8 @@
                             {{ Comptition.want_lead }}
                         </div>
 
-                        <div>
+                        <div class="pt-2">
+                            <p class="pl-4 text-xl">Upload Your Party Informaion By PDF</p>
                             {{ Comptition.party_info_PDF }}
                         </div>
                     </div>
