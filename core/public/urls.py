@@ -5,7 +5,8 @@ from .views import (
     signup,
     logout_request,
     compition_request,
-    admin_panel
+    admin_panel,
+    request_approvement
 )
 
 from django.conf import settings
@@ -19,6 +20,7 @@ urlpatterns = [
     path ('logout/', logout_request, name='Logout'),
     path ('compitition_request/', compition_request, name='Compition_Request'),
     path ('admin-panel/<str:username>/', admin_panel, name='Admin_Panel'),
+    path ('request-edit/<int:id>', request_approvement, name='Request_Approvement'),
     path (
         'passowrd-reset/',
         auth_views.PasswordResetView.as_view(
@@ -27,6 +29,5 @@ urlpatterns = [
         name='Password_reset'
     )
 ]
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -14,6 +14,7 @@ from .models import (
 )
 
 from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 @login_required (login_url='/signup/')
@@ -88,3 +89,13 @@ def admin_panel (request, username):
         'Request_display' : Request_display
     }
     return render (request, 'public/Pages/Admin-request/display-request-info.html', context=context)
+
+
+def request_approvement (request, id):
+
+    Read = get_object_or_404 (Comptition_Request_model, id=id)
+
+    context = {
+        'read' : Read
+    }
+    return render (request, 'public/Pages/Admin-request/Request-approvement/Request-approvement.html', context=context)

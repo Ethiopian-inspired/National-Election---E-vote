@@ -1,0 +1,162 @@
+{% extends "public/base.html" %}
+{% load static %}
+
+{% block title %}EVNP - Request Review{% endblock %}
+
+{% block NavCenter %}
+<div class="flex items-center gap-4 text-slate-900">
+    <div class="inter_Bold">
+        <p class="text-xs uppercase tracking-[0.35em] text-slate-500">Admin Panel</p>
+        <p class="text-3xl">Request Review</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-[90vh] bg-linear-to-br from-slate-50 via-white to-sky-50 px-4 py-6 md:px-8 lg:px-10">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6">
+        <section class="overflow-hidden rounded-[30px] border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
+            <div class="grid gap-6 p-6 md:p-8 xl:grid-cols-[minmax(0,1.25fr)_minmax(340px,0.75fr)]">
+                <div class="space-y-6">
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div class="rounded-[24px] border-4 border-sky-500 rounded-lg bg-slate-50 p-5">
+                            <p class="inter_SemiBold text-xs uppercase tracking-[0.3em] text-slate-500">Party Nickname</p>
+                            <p class="inter_Bold mt-3 text-2xl text-slate-900">{{ read.party_nik_name }}</p>
+                        </div>
+
+                        <div class="rounded-[24px] border border-slate-200 bg-slate-50 p-5">
+                            <p class="inter_SemiBold text-xs uppercase tracking-[0.3em] text-slate-500">Party Chairman</p>
+                            <p class="inter_Bold mt-3 text-2xl text-slate-900">{{ read.party_chairman_name }}</p>
+                        </div>
+
+                        <div class="rounded-[24px] border border-slate-200 bg-slate-50 p-5">
+                            <p class="inter_SemiBold text-xs uppercase tracking-[0.3em] text-slate-500">Full Party Name</p>
+                            <p class="inter_Bold mt-3 text-2xl text-slate-900">{{ read.party_FullName }}</p>
+                        </div>
+
+                        <div class="rounded-[24px] border border-slate-200 bg-slate-50 p-5">
+                            <p class="inter_SemiBold text-xs uppercase tracking-[0.3em] text-slate-500">Document Status</p>
+                            <p class="inter_Bold mt-3 text-2xl text-slate-900">
+                                {% if read.party_info_PDF %}
+                                    PDF Uploaded
+                                {% else %}
+                                    Missing PDF
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="rounded-[28px] border border-slate-200 bg-slate-50 p-6">
+                        <div>
+                            <p class="inter_SemiBold text-xs uppercase tracking-[0.3em] text-slate-500">Description</p>
+                            <h2 class="inter_Bold mt-2 text-2xl text-slate-900">Party Overview</h2>
+                        </div>
+
+                        <div class="mt-4 rounded-[22px] bg-white p-5 shadow-sm">
+                            <p class="text-base leading-8 text-slate-700">{{ read.party_discription|linebreaksbr }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+                        <p class="inter_SemiBold text-xs uppercase tracking-[0.3em] text-slate-500">Review Summary</p>
+                        <h2 class="inter_Bold mt-2 text-2xl text-slate-900">Submission Snapshot</h2>
+
+                        <div class="mt-6 space-y-4">
+                            <div class="flex items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                                <p class="text-sm text-slate-500">Abbreviation</p>
+                                <p class="inter_Bold text-right text-slate-900">{{ read.party_nik_name }}</p>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                                <p class="text-sm text-slate-500">Chairman</p>
+                                <p class="inter_Bold text-right text-slate-900">{{ read.party_chairman_name }}</p>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                                <p class="text-sm text-slate-500">Leadership Target</p>
+                                <p class="inter_Bold text-right text-slate-900">{{ read.want_lead }}</p>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-4">
+                                <p class="text-sm text-slate-500">Attached File</p>
+                                <p class="inter_Bold text-right text-slate-900">
+                                    {% if read.party_info_PDF %}
+                                        Available
+                                    {% else %}
+                                        Not Uploaded
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-[28px] border border-slate-200 bg-slate-900 p-6 text-white shadow-sm">
+                        <p class="inter_SemiBold text-xs uppercase tracking-[0.3em] text-slate-400">Navigation</p>
+                        <h2 class="inter_Bold mt-2 text-2xl">Continue Review</h2>
+                        <p class="mt-3 text-sm leading-7 text-slate-300">
+                            Return to the request list or open the document in a new tab for closer inspection.
+                        </p>
+
+                        <div class="mt-6 flex flex-col gap-3">
+                            <a href="{% url 'Admin_Panel' request.user.username %}" class="inter_Bold rounded-2xl bg-white px-4 py-3 text-center text-slate-900 transition duration-300 hover:scale-[1.01] hover:bg-slate-100">
+                                Back to Requests
+                            </a>
+
+                            {% if read.party_info_PDF %}
+                                <a href="{{ read.party_info_PDF.url }}" target="_blank" rel="noopener noreferrer" class="inter_Bold rounded-2xl border border-white/20 bg-transparent px-4 py-3 text-center text-white transition duration-300 hover:scale-[1.01] hover:bg-white/10">
+                                    Open PDF in New Tab
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="overflow-hidden rounded-[30px] border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
+            <div class="flex flex-col gap-3 border-b border-slate-200 px-6 py-5 md:px-8 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                    <p class="inter_SemiBold text-xs uppercase tracking-[0.3em] text-slate-500">Attached Document</p>
+                    <h2 class="inter_Bold mt-2 text-2xl text-slate-900">Party Information PDF</h2>
+                </div>
+
+                {% if read.party_info_PDF %}
+                    <a href="{{ read.party_info_PDF.url }}" download class="inter_Bold inline-flex items-center justify-center rounded-2xl bg-sky-900 px-5 py-3 text-white transition duration-300 hover:scale-[1.01] hover:bg-sky-800">
+                        Download Document
+                    </a>
+                {% endif %}
+            </div>
+
+            <div class="p-4 md:p-6 lg:p-8">
+                {% if read.party_info_PDF %}
+                    <div class="overflow-hidden rounded-[24px] border border-slate-200 bg-slate-100 shadow-inner">
+                        <iframe
+                            src="{{ read.party_info_PDF.url }}"
+                            title="Party information PDF for {{ read.party_FullName }}"
+                            class="h-[72vh] min-h-[520px] w-full bg-white"
+                        ></iframe>
+                    </div>
+                {% else %}
+                    <div class="flex min-h-[320px] flex-col items-center justify-center rounded-[24px] border border-dashed border-slate-300 bg-slate-50 px-6 text-center">
+                        <p class="inter_Bold text-2xl text-slate-900">No PDF Uploaded</p>
+                        <p class="mt-2 max-w-xl text-sm leading-7 text-slate-500">
+                            This request does not currently include a supporting PDF document for review.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <div class="flex justify-end pb-4">
+            <button
+                type="button"
+                class="inter_Bold rounded-2xl bg-linear-to-r from-emerald-600 to-green-500 px-8 py-4 text-lg text-white shadow-lg shadow-emerald-200 transition duration-300 hover:scale-[1.01] hover:from-emerald-700 hover:to-green-600"
+            >
+                Approved
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
