@@ -6,6 +6,10 @@ from django.conf import settings
 # Create profile
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
+from datetime import timedelta
+
+import uuid
 
 # Place Name
 PLACES_NAME = [
@@ -50,3 +54,14 @@ class Comptition_Request_model (models.Model):
 
     def __str__(self):
         return self.party_nik_name
+    
+
+class Approvement_Token (models.Model):
+
+    user = models.ForeignKey (User, on_delete=models.CASCADE)
+    token = models.UUIDField (default=uuid.uuid4, editable=False, unique=True)
+    create_at = models.DateTimeField (auto_now_add=True)
+    is_uesd = models.BooleanField (default=False)
+
+    def is_expired(self):
+        return timezone.now() > self.create_at + timedelta(hours=24)
