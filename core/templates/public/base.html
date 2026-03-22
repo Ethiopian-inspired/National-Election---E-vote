@@ -70,7 +70,7 @@
                     {% elif message.tags == 'info' %} bg-blue-500
                     {% endif %}
                 ">
-                    <p class="inter_ExtraBold text-4xl text-white">{{ message }}</p>
+                    <p class="inter_ExtraBold text-2xl text-white">{{ message }}</p>
                     <p class="w-[80%] text-center text-xs text-white indent-2">E-Vote National Platform is a secure electronic voting system built to deliver transparent, efficient, and tamper-resistant national elections through modern digital infrastructure.</p>
                 </div>
             {% endfor %}
@@ -95,7 +95,7 @@
 
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_staff %}
-                                    <a href="#" class="block px-4 py-2 bg-sky-800 text-white hover:bg-sky-700">
+                                    <a href="{% url 'Admin_Panel' request.user.username %}" class="block px-4 py-2 bg-sky-800 text-white hover:bg-sky-700">
                                         Admin Panel
                                     </a>
                                 {% endif %}
@@ -103,7 +103,7 @@
                             
                             {% if request.user.is_authenticated %}
                                 {% if not request.user.is_staff %}
-                                    <a href="{% url 'Compition Request' %}" class="block px-4 py-2 bg-sky-800 text-white hover:bg-sky-700">
+                                    <a href="{% url 'Compition_Request' %}" class="block px-4 py-2 bg-sky-800 text-white hover:bg-sky-700">
                                         Election Contest
                                     </a>
                                 {% endif %}

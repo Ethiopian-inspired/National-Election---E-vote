@@ -9,6 +9,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
+from .models import (
+    Comptition_Request_model
+)
+
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 @login_required (login_url='/signup/')
@@ -58,16 +64,38 @@ def logout_request (request):
 
 def compition_request (request):
 
-    ComptitionForm = Comptition_request (request.POST or None)
+    form = Comptition_request (request.POST or None, request.FILES or None)
 
-    if request.method == 'POST':
-        if ComptitionForm.is_valid ():
+    
+    if form.is_valid ():
 
-            ComptitionForm.save()
-            messages.success (request, "Your Information is deliverd!!")
-            return redirect ('Index')
+        form.save()
+        messages.success (request, "Your Information is deliverd!!")
+        return redirect ('Index')
     context = {
-        'Comptition' : ComptitionForm
+        'Comptition' : form
     }
 
     return render (request, 'public/Pages/Comp-page/compition-request-page.html', context=context)
+
+def is_admin (user):
+    return user.is_staff
+
+@user_passes_test (is_admin)
+def admin_panel (request, username):
+    Request_display = Comptition_Request_model.objects.all()
+
+    context = {
+        'Request_display' : Request_display
+    }
+    return render (request, 'public/Pages/Admin-request/display-request-info.html', context=context)
+
+
+def request_approvement (request, id):
+
+    Read = get_object_or_404 (Comptition_Request_model, id=id)
+
+    context = {
+        'read' : Read
+    }
+    return render (request, 'public/Pages/Admin-request/Request-approvement/Request-approvement.html', context=context)
