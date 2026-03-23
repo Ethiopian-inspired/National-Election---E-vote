@@ -8,6 +8,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
+from django.contrib.admin.views.decorators import staff_member_required
+from django.utils import timezone
 
 from .models import (
     Comptition_Request_model,
@@ -101,10 +104,11 @@ def request_approvement (request, id):
     }
     return render (request, 'public/Pages/Admin-request/Request-approvement/Request-approvement.html', context=context)
 
-
-def acceptanc_token_page (request, id):
+@staff_member_required
+def approve_page (request, id):
 
     approve_token = Comptition_Request_model.objects.get (id=id)
+
     if request.method == "POST":
         approve_token.status = Comptition_Request_model.APPROVED
         approve_token.save()
@@ -113,8 +117,31 @@ def acceptanc_token_page (request, id):
         token = Approvement_Token.objects.create(request_status=approve_token)
         print (token)
 
+        return redirect ('Acceptanc_Token_Page', approve_token.id)
+
+
+def acceptanc_token_page (request, id):
+    approve_token = get_object_or_404 (Comptition_Request_model, id=id)
+
+    if approve_token.status != Comptition_Request_model.APPROVED:
+        return HttpResponseForbidden ("The Request Is Not Approved!")
+    
+    if request.user != approve_token.user:
+        return HttpResponseForbidden ("Not Allowed!!")
+    
+    token = Approvement_Token.objects.filter(request_status=approve_token).last()
+
+    if not token:
+        return HttpResponseForbidden ("No Token Found!")
+    
+    if token.is_expired ():
+        return HttpResponseForbidden ("The Code Is Expired!!")
+    
+    if token.is_uesd ():
+        return HttpResponseForbidden ("Token is Already Uesd!")
+    
     context = {
-        'verify_token' : token
+        'approval_token' : token
     }
 
     return render (request, 'public/Pages/Admin-request/Request-approvement/token/tokenpage.html', context=context)

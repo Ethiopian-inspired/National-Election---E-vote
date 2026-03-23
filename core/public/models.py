@@ -68,7 +68,7 @@ class Comptition_Request_model (models.Model):
 
 class Approvement_Token (models.Model):
 
-    request_status = models.ForeignKey (Comptition_Request_model, on_delete=models.CASCADE)
+    request_status = models.ForeignKey (Comptition_Request_model, on_delete=models.CASCADE, related_name='token')
     token = models.UUIDField (default=uuid.uuid4, editable=False, unique=True)
     create_at = models.DateTimeField (auto_now_add=True)
     is_uesd = models.BooleanField (default=False)

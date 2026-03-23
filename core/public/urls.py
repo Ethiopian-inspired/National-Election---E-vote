@@ -7,6 +7,7 @@ from .views import (
     compition_request,
     admin_panel,
     request_approvement,
+    approve_page,
     acceptanc_token_page
 )
 
@@ -22,7 +23,8 @@ urlpatterns = [
     path ('compitition_request/', compition_request, name='Compition_Request'),
     path ('admin-panel/<str:username>/', admin_panel, name='Admin_Panel'),
     path ('request-edit/<int:id>', request_approvement, name='Request_Approvement'),
-    path ('acceptance_success/<int:id>/', acceptanc_token_page, name='Acceptanc_token_Page'),
+    path ('acceptance_success/<int:id>/', approve_page, name='Acceptanc_token_Page'),
+    path ('acceptanc_token_page/<int:id>/', acceptanc_token_page, name='Acceptanc_Token_Page'),
     path (
         'passowrd-reset/',
         auth_views.PasswordResetView.as_view(
