@@ -129,7 +129,7 @@ def acceptanc_token_page (request, id):
     if request.user != approve_token.user:
         return HttpResponseForbidden ("Not Allowed!!")
     
-    token = Approvement_Token.objects.filter(request_status=approve_token).last()
+    token = Approvement_Token.objects.filter(user=approve_token).last()
 
     if not token:
         return HttpResponseForbidden ("No Token Found!")

@@ -66,12 +66,16 @@ class Comptition_Request_model (models.Model):
         return self.party_nik_name
     
 
-class Approvement_Token (models.Model):
-
-    request_status = models.ForeignKey (Comptition_Request_model, on_delete=models.CASCADE, related_name='token')
-    token = models.UUIDField (default=uuid.uuid4, editable=False, unique=True)
-    create_at = models.DateTimeField (auto_now_add=True)
-    is_uesd = models.BooleanField (default=False)
+class Approvement_Token(models.Model):
+    #request_status replace with user
+    user = models.ForeignKey(
+        Comptition_Request_model,
+        on_delete=models.CASCADE,
+        related_name='tokens'
+    )
+    token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    is_used = models.BooleanField(default=False)
 
     def is_expired(self):
         return timezone.now() > self.create_at + timedelta(hours=24)
