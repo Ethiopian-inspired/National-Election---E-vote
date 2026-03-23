@@ -149,14 +149,17 @@
             </div>
         </section>
 
-        <div class="flex justify-end pb-4">
-            <button
-                type="button"
-                class="inter_Bold rounded-2xl bg-linear-to-r from-emerald-600 to-green-500 px-8 py-4 text-lg text-white shadow-lg shadow-emerald-200 transition duration-300 hover:scale-[1.01] hover:from-emerald-700 hover:to-green-600"
-            >
-                Approved
-            </button>
-        </div>
+        <form action="{% url 'Acceptanc_token_Page' read.id %}" method="post">
+            {% csrf_token %}
+            <div class="flex justify-end pb-4">
+                <button
+                    type="submit"
+                    class="inter_Bold rounded-2xl bg-linear-to-r from-emerald-600 to-green-500 px-8 py-4 text-lg text-white shadow-lg shadow-emerald-200 transition duration-300 hover:scale-[1.01] hover:from-emerald-700 hover:to-green-600"
+                >
+                    Approved
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}

@@ -6,7 +6,8 @@ from .views import (
     logout_request,
     compition_request,
     admin_panel,
-    request_approvement
+    request_approvement,
+    acceptanc_token_page
 )
 
 from django.conf import settings
@@ -21,6 +22,7 @@ urlpatterns = [
     path ('compitition_request/', compition_request, name='Compition_Request'),
     path ('admin-panel/<str:username>/', admin_panel, name='Admin_Panel'),
     path ('request-edit/<int:id>', request_approvement, name='Request_Approvement'),
+    path ('acceptance_success/<int:id>/', acceptanc_token_page, name='Acceptanc_token_Page'),
     path (
         'passowrd-reset/',
         auth_views.PasswordResetView.as_view(

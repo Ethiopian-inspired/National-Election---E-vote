@@ -10,7 +10,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from .models import (
-    Comptition_Request_model
+    Comptition_Request_model,
+    Approvement_Token
 )
 
 from django.contrib.auth.decorators import user_passes_test
@@ -99,3 +100,21 @@ def request_approvement (request, id):
         'read' : Read
     }
     return render (request, 'public/Pages/Admin-request/Request-approvement/Request-approvement.html', context=context)
+
+
+def acceptanc_token_page (request, id):
+
+    approve_token = Comptition_Request_model.objects.get (id=id)
+    if request.method == "POST":
+        approve_token.status = Comptition_Request_model.APPROVED
+        approve_token.save()
+        messages.success (request, 'Your Request Is Approved!')
+
+        token = Approvement_Token.objects.create(request_status=approve_token)
+        print (token)
+
+    context = {
+        'verify_token' : token
+    }
+
+    return render (request, 'public/Pages/Admin-request/Request-approvement/token/tokenpage.html', context=context)

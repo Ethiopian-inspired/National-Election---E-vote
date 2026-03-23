@@ -41,6 +41,16 @@ class Profile (models.Model):
 
 class Comptition_Request_model (models.Model):
 
+    PENDING = 'pending'
+    APPROVED = 'approved'
+
+    status = models.CharField (max_length=20, choices=[
+        (PENDING, 'pending'),
+        (APPROVED, 'approved')
+    ],
+        default=PENDING
+    )
+
     party_nik_name = models.CharField (max_length=5)
     party_FullName = models.CharField (max_length=55)
 
@@ -58,7 +68,7 @@ class Comptition_Request_model (models.Model):
 
 class Approvement_Token (models.Model):
 
-    user = models.ForeignKey (User, on_delete=models.CASCADE)
+    request_status = models.ForeignKey (Comptition_Request_model, on_delete=models.CASCADE)
     token = models.UUIDField (default=uuid.uuid4, editable=False, unique=True)
     create_at = models.DateTimeField (auto_now_add=True)
     is_uesd = models.BooleanField (default=False)
