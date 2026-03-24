@@ -70,12 +70,11 @@ def compition_request (request):
 
     form = Comptition_request (request.POST or None, request.FILES or None)
 
-    
     if form.is_valid ():
-
         form.save()
         messages.success (request, "Your Information is deliverd!!")
         return redirect ('Index')
+    
     context = {
         'Comptition' : form
     }
@@ -109,15 +108,17 @@ def approve_page (request, id):
 
     approve_token = Comptition_Request_model.objects.get (id=id)
 
+    if request.method != "POST":
+        return HttpResponseForbidden ("Approval requests must be submitted with POST.")
+
     if request.method == "POST":
         approve_token.status = Comptition_Request_model.APPROVED
         approve_token.save()
-        messages.success (request, 'Your Request Is Approved!')
+        messages.success (request, f"'{approve_token.party_nik_name}' Request Is Approved!")
 
-        token = Approvement_Token.objects.create(request_status=approve_token)
-        print (token)
+        token = Approvement_Token.objects.create(request=approve_token)
 
-        return redirect ('Acceptanc_Token_Page', approve_token.id)
+        return redirect ('Index')
 
 
 def acceptanc_token_page (request, id):
@@ -129,7 +130,7 @@ def acceptanc_token_page (request, id):
     if request.user != approve_token.user:
         return HttpResponseForbidden ("Not Allowed!!")
     
-    token = Approvement_Token.objects.filter(user=approve_token).last()
+    token = Approvement_Token.objects.filter(request=approve_token).order_by('-create_at').first()
 
     if not token:
         return HttpResponseForbidden ("No Token Found!")
@@ -137,7 +138,7 @@ def acceptanc_token_page (request, id):
     if token.is_expired ():
         return HttpResponseForbidden ("The Code Is Expired!!")
     
-    if token.is_uesd ():
+    if token.is_used:
         return HttpResponseForbidden ("Token is Already Uesd!")
     
     context = {
