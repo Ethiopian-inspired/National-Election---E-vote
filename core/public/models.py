@@ -67,8 +67,8 @@ class Comptition_Request_model (models.Model):
     
 
 class Approvement_Token(models.Model):
-    #request_status replace with user
-    user = models.ForeignKey(
+    #request_status replace with request
+    request = models.ForeignKey(
         Comptition_Request_model,
         on_delete=models.CASCADE,
         related_name='tokens'
