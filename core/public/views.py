@@ -86,6 +86,7 @@ def is_admin (user):
 
 @user_passes_test (is_admin)
 def admin_panel (request, username):
+
     Request_display = Comptition_Request_model.objects.all()
 
     context = {
@@ -94,14 +95,25 @@ def admin_panel (request, username):
     return render (request, 'public/Pages/Admin-request/display-request-info.html', context=context)
 
 
-def request_approvement (request, id):
+def request_approvement(request, id):
 
-    Read = get_object_or_404 (Comptition_Request_model, id=id)
+    read = get_object_or_404(Comptition_Request_model, id=id)
 
-    context = {
-        'read' : Read
-    }
-    return render (request, 'public/Pages/Admin-request/Request-approvement/Request-approvement.html', context=context)
+    if read.status != "approved":
+
+        context = {
+            "read": read
+        }
+        return render(
+            request,
+            "public/Pages/Admin-request/Request-approvement/Request-approvement.html",
+            context
+        )
+
+    else:
+        messages.success(request, "The Request Is Already Approved!")
+        return redirect("Index")
+
 
 @staff_member_required
 def approve_page (request, id):
