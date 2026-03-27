@@ -1,0 +1,137 @@
+{% extends "public/base.html" %}
+{% load static %}
+
+{% block title %}EVNP - User Token{% endblock %}
+
+{% block NavCenter %}
+<div class="flex items-center gap-4 text-slate-900">
+    <div class="inter_Bold">
+        <p class="text-xs uppercase tracking-[0.35em] text-slate-500">Secure Access</p>
+        <p class="text-3xl">User Token</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-[90vh] bg-linear-to-br from-slate-50 via-white to-sky-50 px-4 py-6 md:px-8 lg:px-10">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6">
+        <section class="overflow-hidden rounded-[30px] border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
+            <div class="grid gap-6 p-6 md:p-8 xl:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
+                <div class="relative overflow-hidden rounded-[28px] bg-linear-to-br from-sky-950 via-sky-900 to-cyan-700 p-6 text-white md:p-8">
+                    <div class="absolute right-[-40px] top-[-40px] h-40 w-40 rounded-full bg-white/10 blur-2xl"></div>
+                    <div class="absolute bottom-[-50px] left-[-30px] h-44 w-44 rounded-full bg-cyan-300/10 blur-2xl"></div>
+
+                    <div class="relative">
+                        <p class="inter_SemiBold text-xs uppercase tracking-[0.35em] text-sky-100/80">Approval Credential</p>
+                        <h1 class="inter_Bold mt-3 max-w-xl text-3xl leading-tight md:text-4xl">
+                            Your election access token is ready.
+                        </h1>
+                        <p class="mt-4 max-w-2xl text-sm leading-7 text-sky-100/85 md:text-base">
+                            Keep this code private and use it only in the approved election flow. A fresh token appears here while it remains active and unused.
+                        </p>
+
+                        <div class="mt-8 rounded-[26px] border border-white/15 bg-white/10 p-5 backdrop-blur-sm md:p-6">
+                            <div class="flex items-center justify-between gap-3">
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.3em] text-sky-100/75">Current Token</p>
+                                    <p class="mt-2 text-sm text-sky-100/75">Use this exact value when the system asks for your approval credential.</p>
+                                </div>
+                                <div class="rounded-full border border-emerald-300/30 bg-emerald-400/15 px-3 py-1 text-xs uppercase tracking-[0.25em] text-emerald-100">
+                                    {% if token and not token.is_used %}
+                                        Active
+                                    {% else %}
+                                        Pending
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            {% if token %}
+                                <div class="mt-5 overflow-x-auto rounded-[22px] bg-slate-950/55 p-4 shadow-inner shadow-black/20">
+                                    <p class="font-mono text-sm leading-8 tracking-[0.18em] text-cyan-100 md:text-base">
+                                        {{ token.token }}
+                                    </p>
+                                </div>
+                            {% else %}
+                                <div class="mt-5 rounded-[22px] border border-dashed border-white/20 bg-slate-950/35 px-5 py-8 text-center">
+                                    <p class="inter_Bold text-2xl text-white">No active token yet</p>
+                                    <p class="mt-2 text-sm leading-7 text-sky-100/75">
+                                        Once an approval token is generated for your account, it will appear here automatically.
+                                    </p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="rounded-[28px] border border-slate-200 bg-slate-50 p-6">
+                        <p class="inter_SemiBold text-xs uppercase tracking-[0.3em] text-slate-500">Token Summary</p>
+                        <h2 class="inter_Bold mt-2 text-2xl text-slate-900">Current Status</h2>
+
+                        <div class="mt-6 space-y-4">
+                            <div class="flex items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                                <p class="text-sm text-slate-500">Account Holder</p>
+                                <p class="inter_Bold text-right text-slate-900">{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                                <p class="text-sm text-slate-500">Username</p>
+                                <p class="inter_Bold text-right text-slate-900">{{ request.user.username }}</p>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                                <p class="text-sm text-slate-500">Issued At</p>
+                                <p class="inter_Bold text-right text-slate-900">
+                                    {% if token %}
+                                        {{ token.create_at|date:"M d, Y - H:i" }}
+                                    {% else %}
+                                        Waiting
+                                    {% endif %}
+                                </p>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-4">
+                                <p class="text-sm text-slate-500">Usage State</p>
+                                <p class="inter_Bold text-right {% if token and not token.is_used %}text-emerald-600{% elif token and token.is_used %}text-amber-600{% else %}text-slate-400{% endif %}">
+                                    {% if token %}
+                                        {% if token.is_used %}
+                                            Used
+                                        {% else %}
+                                            Ready
+                                        {% endif %}
+                                    {% else %}
+                                        Unavailable
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+                        <p class="inter_SemiBold text-xs uppercase tracking-[0.3em] text-slate-500">Security Notes</p>
+                        <h2 class="inter_Bold mt-2 text-2xl text-slate-900">Handle With Care</h2>
+
+                        <div class="mt-5 space-y-3 text-sm leading-7 text-slate-600">
+                            <p class="rounded-[20px] bg-slate-50 px-4 py-3">
+                                Keep the token private and avoid sharing screenshots or copies in public channels.
+                            </p>
+                            <p class="rounded-[20px] bg-slate-50 px-4 py-3">
+                                Use the most recent token shown on this page if multiple approvals have been generated over time.
+                            </p>
+                            <p class="rounded-[20px] bg-slate-50 px-4 py-3">
+                                Return here if you need to confirm whether your current token is still available.
+                            </p>
+                        </div>
+
+                        <div class="mt-6">
+                            <a href="{% url 'Index' %}" class="inter_Bold inline-flex w-full items-center justify-center rounded-2xl bg-sky-900 px-5 py-3 text-white transition duration-300 hover:scale-[1.01] hover:bg-sky-800">
+                                Back to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

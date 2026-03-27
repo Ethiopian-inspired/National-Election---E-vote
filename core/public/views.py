@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import timezone
+from datetime import timedelta
 
 from .models import (
     Comptition_Request_model,
@@ -117,20 +118,34 @@ def request_approvement(request, id):
 
 @staff_member_required
 def approve_page (request, id):
+    
+    approve_token = get_object_or_404 (Comptition_Request_model, id=id)
 
-    approve_token = Comptition_Request_model.objects.get (id=id)
+    if approve_token.status == Comptition_Request_model.APPROVED:
 
-    if request.method != "POST":
-        return HttpResponseForbidden ("Approval requests must be submitted with POST.")
-
-    if request.method == "POST":
-        approve_token.status = Comptition_Request_model.APPROVED
-        approve_token.save()
-        messages.success (request, f"'{approve_token.party_nik_name}' Request Is Approved!")
-
-        token = Approvement_Token.objects.create(request=approve_token)
-
+        messages.warning (request, 'This Request is Alreadt Approved!')
         return redirect ('Index')
+    
+    approve_token.status = Comptition_Request_model.APPROVED
+    approve_token.save()
+    
+    Approvement_Token.objects.create(
+        user=request.user,
+        request=approve_token,
+        expired_at=timezone.now() + timedelta(hours=24)
+    )
+
+    messages.success (request, f"'{approve_token.party_nik_name}' request approved and token Generated!")
+    return redirect ('User_Token')
+    
+
+def user_token (request):
+    token = Approvement_Token.objects.filter(
+        user=request.user,
+        is_used=False
+    ).last()
+
+    return render (request, 'public/Pages/User Token/UserToken.html', {'token' : token})
 
 
 def acceptanc_token_page (request, id):
@@ -139,13 +154,13 @@ def acceptanc_token_page (request, id):
     if approve_token.status != Comptition_Request_model.APPROVED:
         return HttpResponseForbidden ("The Request Is Not Approved!")
     
-    if request.user != approve_token.user:
-        return HttpResponseForbidden ("Not Allowed!!")
-    
     token = Approvement_Token.objects.filter(request=approve_token).order_by('-create_at').first()
 
     if not token:
         return HttpResponseForbidden ("No Token Found!")
+
+    if request.user != token.user:
+        return HttpResponseForbidden ("Not Allowed!!")
     
     if token.is_expired ():
         return HttpResponseForbidden ("The Code Is Expired!!")

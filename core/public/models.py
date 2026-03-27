@@ -63,19 +63,29 @@ class Comptition_Request_model (models.Model):
     party_logo = models.ImageField (upload_to='Parties_logo/')
 
     def __str__(self):
-        return self.party_nik_name
+        return 'ID:' + str(self.id) + ' ' + self.party_nik_name
     
 
 class Approvement_Token(models.Model):
     #request_status replace with request
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     request = models.ForeignKey(
         Comptition_Request_model,
         on_delete=models.CASCADE,
         related_name='tokens'
     )
+
     token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+
     create_at = models.DateTimeField(auto_now_add=True)
+    expired_at = models.DateTimeField()
+
     is_used = models.BooleanField(default=False)
 
     def is_expired(self):
-        return timezone.now() > self.create_at + timedelta(hours=24)
+        return timezone.now() >= self.expired_at
+
+    def save(self, *args, **kwargs):
+        if not self.expired_at:
+            self.expired_at = timezone.now() + timedelta(hours=24)
+        super().save(*args, **kwargs)
