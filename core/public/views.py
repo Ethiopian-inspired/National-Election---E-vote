@@ -24,7 +24,9 @@ from django.shortcuts import get_object_or_404
 
 @login_required (login_url='/signup/')
 def index (request):
-    return render (request, 'public/Pages/index.html')
+    if request.user.is_authenticated:
+        token = Approvement_Token.objects.filter(user=request.user).first()
+    return render (request, 'public/Pages/index.html', { 'token' : token })
 
 def election (request):
     SingInForm = SignIn (request.POST or None)

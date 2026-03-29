@@ -78,7 +78,7 @@
     {% endif %}
 
     {% block navbar %}
-        <div class="w-full grid grid-cols-[30%_1fr_30%] h-[10vh] flex justify-between items-center">
+        <div class="w-full grid grid-cols-[40%_1fr_30%] h-[10vh] flex justify-between items-center">
             <div class="w-full flex justify-center items-center">
                 <ul class="w-4/5 inter_Bold flex justify-start items-center text-lg gap-10">
                     <a href="{% url 'Index' %}" class="block px-4 py-2 hover:bg-gray-100 transform hover:scale-110 transition duration-300"><li>Home</li></a>
@@ -120,6 +120,12 @@
                         </div>
 
                     </div>
+
+                    {% if user.is_authenticated and token %}
+                        <div>
+                            <a href="{% url 'User_Token' %}"><p class="">PT Token</p></a>
+                        </div>
+                    {% endif %}
                 </ul>
             </div>
 
