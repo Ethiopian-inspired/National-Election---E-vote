@@ -146,8 +146,10 @@ def user_token (request):
         is_used=False
     ).last()
 
-    return render (request, 'public/Pages/User Token/UserToken.html', {'token' : token})
-
+    if request.user == token.user or request.user.is_staff :
+        return render (request, 'public/Pages/User Token/UserToken.html', {'token' : token})
+    else:
+        return redirect ('Index')
 
 def acceptanc_token_page (request, id):
     approve_token = get_object_or_404 (Comptition_Request_model, id=id)

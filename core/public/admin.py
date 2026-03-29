@@ -5,4 +5,5 @@ from .models import (
 )
 # Register your models here.
 
-admin.site.register (Comptition_Request_model)
+admin.site.register (Comptition_Request_model),
+admin.site.register (Approvement_Token)
