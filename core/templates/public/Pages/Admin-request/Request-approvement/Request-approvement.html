@@ -149,7 +149,7 @@
             </div>
         </section>
 
-        <form action="{% url 'Acceptanc_token_Page' read.id %}" method="POST">
+        <form action="{% url 'Acceptanc_token_Page' read.id %}" method="post">
             {% csrf_token %}
             <div class="flex justify-end pb-4">
                 <button
