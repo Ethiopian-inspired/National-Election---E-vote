@@ -46,10 +46,15 @@
                             </div>
 
                             {% if token %}
-                                <div class="mt-5 overflow-x-auto rounded-[22px] bg-slate-950/55 p-4 shadow-inner shadow-black/20">
-                                    <p class="font-mono text-sm leading-8 tracking-[0.18em] text-cyan-100 md:text-base">
-                                        {{ token.token }}
-                                    </p>
+                                <div class="flex flex-col gap-4">
+                                    <div class="mt-5 overflow-x-auto rounded-[22px] bg-slate-950/55 p-4 shadow-inner shadow-black/20">
+                                        <p class="font-mono text-sm leading-8 tracking-[0.18em] text-cyan-100 md:text-base">
+                                            {{ token.token }}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        {% include 'public/Pages/User Token/Include/post_confirmation.html' %}
+                                    </div>
                                 </div>
                             {% else %}
                                 <div class="mt-5 rounded-[22px] border border-dashed border-white/20 bg-slate-950/35 px-5 py-8 text-center">

@@ -123,7 +123,7 @@
 
                     {% if user.is_authenticated and token %}
                         <div>
-                            <a href="{% url 'User_Token' %}"><p class="">PT Token</p></a>
+                            <a href="{% url 'User_Token' token.id %}"><p class="">PT Token</p></a>
                         </div>
                     {% endif %}
                 </ul>

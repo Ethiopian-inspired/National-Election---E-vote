@@ -139,10 +139,11 @@ def approve_page (request, id):
     )
 
     messages.success (request, f"'{approve_token.party_nik_name}' request approved and token Generated!")
-    return redirect ('User_Token')
+    return redirect ('Index')
     
 
-def user_token (request):
+def user_token (request, id):
+
     token = Approvement_Token.objects.filter(
         user=request.user,
         is_used=False
@@ -152,6 +153,19 @@ def user_token (request):
         return render (request, 'public/Pages/User Token/UserToken.html', {'token' : token})
     else:
         return redirect ('Index')
+    
+
+def publish_check(request, id):
+
+    publish_confirm = get_object_or_404(Comptition_Request_model, id=id)
+
+    if request.method == "POST":
+        publish_confirm.publish_status = Comptition_Request_model.PUBLISH
+        publish_confirm.save()
+
+        messages.success(request, "Your Party is Published")
+
+    return redirect("Index")
 
 def acceptanc_token_page (request, id):
     approve_token = get_object_or_404 (Comptition_Request_model, id=id)
