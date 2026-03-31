@@ -142,7 +142,7 @@ def approve_page (request, id):
     return redirect ('User_Token')
     
 
-def user_token (request):
+def user_token (request, id):
     token = Approvement_Token.objects.filter(
         user=request.user,
         is_used=False
