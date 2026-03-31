@@ -39,7 +39,7 @@
                 </button>
 
                 <!-- Post Form -->
-                <form action="{% url '' %}" method="POST">
+                <form method="POST" action="{% url 'Publish_check' token.id %}">
                     {% csrf_token %}
                     <button 
                         type="submit"
