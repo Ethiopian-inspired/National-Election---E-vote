@@ -41,14 +41,26 @@ class Profile (models.Model):
 
 class Comptition_Request_model (models.Model):
 
+# Approvment Choice
     PENDING = 'pending'
     APPROVED = 'approved'
+
+# Publish party Info
+    PUBLISH = 'publish'
+    UNPUBLISH = 'unpublish'
 
     status = models.CharField (max_length=20, choices=[
         (PENDING, 'pending'),
         (APPROVED, 'approved')
     ],
         default=PENDING
+    )
+
+    publish_status = models.CharField (max_length=20, choices=[
+        (PUBLISH, 'publish'),
+        (UNPUBLISH, 'unpublish')
+    ],
+        default=UNPUBLISH
     )
 
     party_nik_name = models.CharField (max_length=5)
