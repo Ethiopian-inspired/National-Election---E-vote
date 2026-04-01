@@ -10,7 +10,8 @@ from .views import (
     approve_page,
     acceptanc_token_page,
     user_token,
-    publish_check
+    publish_check,
+    party_publish
 )
 
 from django.conf import settings
@@ -28,7 +29,8 @@ urlpatterns = [
     path ('acceptance_success/<int:id>/', approve_page, name='Acceptanc_token_Page'),
     path ('acceptanc_token_page/<int:id>/', acceptanc_token_page, name='Acceptanc_Token_Page'),
     path ('user_token/<int:id>/', user_token, name='User_Token'),
-    path("published/<int:id>/", publish_check, name="Publish_check"),
+    path ('published/<int:id>/', publish_check, name="Publish_check"),
+    path ('post_party', party_publish, name='Post_party'),
     path (
         'passowrd-reset/',
         auth_views.PasswordResetView.as_view(

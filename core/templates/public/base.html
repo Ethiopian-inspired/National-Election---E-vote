@@ -121,10 +121,12 @@
 
                     </div>
 
-                    {% if user.is_authenticated and token %}
-                        <div>
-                            <a href="{% url 'User_Token' token.id %}"><p class="">PT Token</p></a>
-                        </div>
+                    {% if not request.user.is_staff %}
+                        {% if user.is_authenticated and token %}
+                            <div>
+                                <a href="{% url 'User_Token' token.id %}"><p class="">PT Token</p></a>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 </ul>
             </div>
