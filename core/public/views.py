@@ -192,3 +192,17 @@ def acceptanc_token_page (request, id):
     }
 
     return render (request, 'public/Pages/Admin-request/Request-approvement/token/tokenpage.html', context=context)
+
+@login_required (login_url='/signup/')
+def party_publish (request):
+
+    post_status = Comptition_Request_model.objects.filter(
+        status = Comptition_Request_model.APPROVED,
+        publish_status = Comptition_Request_model.PUBLISH
+    )
+
+    context = {
+        'data' : post_status
+    }
+
+    return render (request, 'public/Pages/Party publish/Party_publish.html', context)
