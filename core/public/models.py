@@ -101,3 +101,6 @@ class Approvement_Token(models.Model):
         if not self.expired_at:
             self.expired_at = timezone.now() + timedelta(hours=24)
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return 'ID:_' + str(self.id) + '____|Name:_' + str(self.user) + '____|Party Own:_' + str(self.request)
