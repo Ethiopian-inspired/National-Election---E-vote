@@ -41,6 +41,10 @@ class Profile (models.Model):
 
 class Comptition_Request_model (models.Model):
 
+# Party Requester
+
+    user = models.ForeignKey (User, on_delete=models.CASCADE, related_name="party_requests")
+
 # Approvment Choice
     PENDING = 'pending'
     APPROVED = 'approved'
