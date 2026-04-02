@@ -41,6 +41,10 @@ class Profile (models.Model):
 
 class Comptition_Request_model (models.Model):
 
+# Party Requester
+
+    user = models.ForeignKey (User, on_delete=models.CASCADE, related_name="party_requests")
+
 # Approvment Choice
     PENDING = 'pending'
     APPROVED = 'approved'
@@ -75,7 +79,7 @@ class Comptition_Request_model (models.Model):
     party_logo = models.ImageField (upload_to='Parties_logo/')
 
     def __str__(self):
-        return 'ID:' + str(self.id) + ' ' + self.party_nik_name
+        return f"{self.party_nik_name} (ID:{self.id})"
     
 
 class Approvement_Token(models.Model):
@@ -101,3 +105,6 @@ class Approvement_Token(models.Model):
         if not self.expired_at:
             self.expired_at = timezone.now() + timedelta(hours=24)
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return 'ID:_' + str(self.id) + '____|Name:_' + str(self.user) + '____|Party Own:_' + str(self.request)

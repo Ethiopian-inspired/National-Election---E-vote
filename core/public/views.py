@@ -71,14 +71,19 @@ def logout_request (request):
 
 def compition_request (request):
 
-    form = Comptition_request (request.POST, request.FILES)
-
     if request.method == 'POST':
+        form = Comptition_request (request.POST, request.FILES)
+
         if form.is_valid ():
-            form.save()
+            obj = form.save(commit=False)
+            obj.user = request.user
+            obj.save()
+            
             messages.success (request, "Your Information is deliverd!!")
             return redirect ('Index')
-    
+    else:
+        form = Comptition_request ()
+
     context = {
         'Comptition' : form
     }
@@ -130,10 +135,10 @@ def approve_page (request, id):
         return redirect ('Index')
     
     approve_token.status = Comptition_Request_model.APPROVED
-    approve_token.save()
+    approve_token.save(update_fields=["status"])
     
     Approvement_Token.objects.create(
-        user=request.user,
+        user=approve_token.user,
         request=approve_token,
         expired_at=timezone.now() + timedelta(hours=24)
     )
@@ -206,3 +211,16 @@ def party_publish (request):
     }
 
     return render (request, 'public/Pages/Party publish/Party_publish.html', context)
+
+def vote_page (request, username):
+
+    vote_status = Comptition_Request_model.objects.filter(
+        status = Comptition_Request_model.APPROVED,
+        publish_status = Comptition_Request_model.PUBLISH
+    )
+
+    context = {
+        'vote' : vote_status
+    }
+
+    return render (request, 'public/Vote/vote.html', context)

@@ -4,147 +4,192 @@
 {% block title %} EVNP - Home {% endblock  %}
 
 {% block content %}
-<div class="flex flex-col justify-center items-center">
+<div class="flex flex-col items-center pb-12">
 
-    <div class="w-[98%] h-[90vh] bg-radial-[at_25%_25%] from-sky-800 to-sky-950 to-75% card flex flex-col justify-start items-center gap-4">
-        <div class="w-full h-1/5"></div>
-        <div class="w-full h-1/5 p-10 flex flex-col justify-start items-center gap-4">
-            <h1 class="text-7xl text-white inter_Bold">E-Vote National Platform</h1>
-            <p class="text-white text-sm poppins_extralight w-2/5 text-center">E-Vote National Platform is a secure electronic voting system built to deliver transparent, efficient, and tamper-resistant national elections through modern digital infrastructure.</p>
-        </div>
-        <div class="w-full h-2/5 flex justify-center items-center">
-            <div>
-                <img class="w-[280px]" src="{% static 'Image/Index/FingerPrint.png' %}" alt="">
-            </div>
-            <div class="w-2/5 h-8/10 flex flex-col justify-start items-start gap-4">
-                <h1 class="inter_SemiBold text-6xl text-white">Real-Time Results</h1>
-                <p class="inter_Regular text-sm text-white w-8/10 indent-8">E-Vote National Platform is a secure electronic voting system built to deliver transparent, efficient, and tamper-resistant national elections through modern digital infrastructure.</p>
-                <p class="text-sm text-white">E-Vote National Platform aims to strengthen democratic processes in the digital age</p>
-                <div class="w-4/5 flex justify-center items-center text-white inter_Bold flex justify-center items-center gap-10">
-                    <p>Secure</p>
-                    <p>Transparency</p>
-                    <p>Scalable</p>
+    <section class="relative mt-3 flex w-[98%] max-w-[1600px] flex-col overflow-hidden rounded-[34px] bg-radial-[at_20%_20%] from-sky-800 via-sky-900 to-slate-950 px-6 py-8 text-white shadow-2xl shadow-sky-950/15 md:px-10 lg:px-14 lg:py-10">
+        <div class="pointer-events-none absolute left-[-60px] top-[14%] h-56 w-56 rounded-full bg-cyan-300/10 blur-3xl"></div>
+        <div class="pointer-events-none absolute bottom-[-120px] right-[8%] h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
+        <div class="pointer-events-none absolute right-[30%] top-[-40px] h-40 w-40 rounded-full bg-sky-200/10 blur-3xl"></div>
+
+        <div class="relative grid gap-10 xl:grid-cols-[1.1fr_0.9fr] xl:items-center">
+            <div class="flex flex-col gap-7">
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="rounded-full border border-white/15 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.32em] text-sky-100 backdrop-blur-sm">
+                        Secure National Voting
+                    </div>
+                    <div class="rounded-full border border-emerald-300/25 bg-emerald-400/15 px-5 py-2 text-xs uppercase tracking-[0.32em] text-emerald-50">
+                        Digital Democracy
+                    </div>
+                </div>
+
+                <div class="max-w-4xl">
+                    <h1 class="inter_Bold text-5xl leading-tight text-white md:text-6xl xl:text-7xl">E-Vote National Platform</h1>
+                    <p class="mt-5 max-w-2xl text-base leading-8 text-sky-50/85 md:text-lg">
+                        A secure electronic voting experience designed to make national elections transparent, efficient, and resilient through trusted digital infrastructure.
+                    </p>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-3">
+                    <div class="rounded-[24px] border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-xs uppercase tracking-[0.25em] text-sky-100/70">Security</p>
+                        <p class="mt-3 inter_Bold text-2xl">Protected identity and verified participation.</p>
+                    </div>
+                    <div class="rounded-[24px] border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-xs uppercase tracking-[0.25em] text-sky-100/70">Transparency</p>
+                        <p class="mt-3 inter_Bold text-2xl">Clear and trackable election visibility.</p>
+                    </div>
+                    <div class="rounded-[24px] border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-xs uppercase tracking-[0.25em] text-sky-100/70">Scalability</p>
+                        <p class="mt-3 inter_Bold text-2xl">Built to support large national participation.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="{% url 'Vote_Page' request.user.username %}">
+                        <button class="cursor-pointer rounded-2xl bg-white px-8 py-4 text-2xl text-sky-950 inter_Bold shadow-xl shadow-sky-950/25 transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                            Vote Now
+                        </button>
+                    </a>
+                    <button class="rounded-2xl border border-white/20 bg-white/10 px-8 py-4 text-lg text-white inter_Bold backdrop-blur-sm transition duration-300 hover:bg-white/15">
+                        Election Result
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-6 text-sm text-white/45">
+                    <p>Terms of use</p>
+                    <p>Privacy policy</p>
+                    <p>National_Election@gmail.com</p>
                 </div>
             </div>
-        </div>
-        <div class="w-full h-1/10 flex justify-center items-start">
-            <button class="w-[200px] p-4 bg-linear-to-r from-sky-950 to-sky-800 text-white text-3xl inter_Bold rounded-lg shadow-md">Vote</button>
-        </div>
-        <div class="w-full h-1/10 text-white/20 flex justify-center items-center gap-10">
-            <p>Terms of use</p>
-            <p>Privacy policy</p>
-            <p>National_Election@gmail.com</p>
-        </div>
-    </div>
 
-    <div class="w-full h-[80vh] flex flex-col justify-center items-center">
-        <div class="w-full h-[50vh] p-5 flex justify-center items-center">
-            <div class="w-1/2 flex justify-center items-center">
-                <img class="w-8/10 shadow-lg mask-y-from-70% mask-y-to-90%" src="{% static 'Image/Index/sec-section/Section img.png' %}" alt="">
-            </div>
-            <div class="w-1/2 flex flex-col justify-center items-center">
-                <div class="flex flex-col justify-center gap-6">
-                    <div class="w-4/5 flex justify-center">
-                        <p class="inter_Bold text-5xl">Switch to E-vote</p>
+            <div class="relative flex justify-center xl:justify-end">
+                <div class="relative flex w-full max-w-[540px] flex-col gap-5 rounded-[32px] border border-white/10 bg-white/10 p-5 shadow-2xl shadow-slate-950/30 backdrop-blur-md">
+                    <div class="absolute -right-5 -top-5 rounded-full bg-emerald-400 px-4 py-2 text-xs uppercase tracking-[0.28em] text-slate-950 inter_Bold shadow-lg">
+                        Live
                     </div>
-                    <div class="flex flex-col gap-8">
+
+                    <div class="flex items-center justify-center rounded-[28px] border border-white/10 bg-linear-to-br from-white/15 to-white/5 p-6">
+                        <img class="w-[260px] drop-shadow-2xl" src="{% static 'Image/Index/FingerPrint.png' %}" alt="Fingerprint identity verification illustration">
+                    </div>
+
+                    <div class="grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
                         <div>
-                            <div class="w-4/5 flex flex-col gap-2">
-                                <p class="inter_Bold text-xl">Professional & Policy-Level</p>
-                                <div class="w-full flex justify-center">
-                                    <ul class="w-8/10 poppins_extralight text-sm list-disc indent-2">
-                                        <li>By embracing secure digital systems, nations can improve efficiency, enhance accountability, and strengthen public trust in democratic processes.</li>
-                                        <li>By embracing secure digital systems, nations can improve efficiency, enhance accountability, and strengthen public trust in democratic processes.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="w-4/5 flex flex-col gap-2">
-                                <p class="inter_Bold text-xl">Security-Focused Version</p>
-                                <div class="w-full flex justify-center">
-                                    <ul class="w-8/10 poppins_extralight text-sm list-disc indent-2 flex flex-col justify-center items-center">
-                                        <li>By embracing secure digital systems, nations can improve efficiency, enhance accountability, and strengthen public trust in democratic processes.</li>
-                                        <li>By embracing secure digital systems, nations can improve efficiency, enhance accountability, and strengthen public trust in democratic processes.</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p class="text-xs uppercase tracking-[0.28em] text-sky-100/70">Real-Time Results</p>
+                            <h2 class="mt-3 inter_Bold text-3xl leading-tight">Confidence through monitored digital election flow.</h2>
+                            <p class="mt-3 text-sm leading-7 text-sky-50/80">
+                                The platform is designed to improve trust in the voting journey with modern controls, transparent processing, and a reliable election experience.
+                            </p>
                         </div>
-                        <div class="w-4/5 flex flex-col justify-center items-center">
-                            <p class="poppins_extralight text-2xl">We Waiting You</p>
-                            <p class="inter_SemiBold text-sky-800 text-4xl">May 25</p>
+                        <div class="grid gap-3 text-right text-sm text-white/80">
+                            <div class="rounded-[20px] bg-slate-950/25 px-4 py-3">
+                                Secure
+                            </div>
+                            <div class="rounded-[20px] bg-slate-950/25 px-4 py-3">
+                                Transparent
+                            </div>
+                            <div class="rounded-[20px] bg-slate-950/25 px-4 py-3">
+                                Scalable
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="w-full h-[25vh] p-5 flex justify-center items-center">
-            <div class="w-4/10 flex flex-col justify-center items-center">
-                <div class="w-4/5 h-full flex flex-col justify-center items-start">
-                    <p class="inter_Bold text-3xl p-2">Work With Us</p>
-                    <div class="w-4/5 flex flex-col justify-center gap-4">
-                        <ul class="inter_SemiBold list-disc text-base">
-                            <li>By embracing secure digital systems, nations can improve efficiency, enhance accountability, and strengthen public trust in democratic processes.</li>
-                        </ul>
-                        <div class="w-full flex justify-center items-center text-gray-300">
-                            <ul class="w-4/5 text-sm text-center">
-                                <li>By embracing secure digital systems, nations can improve efficiency, enhance accountability.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="w-5/10 h-full flex justify-center items-center">
-                <img src="{% static 'Image/Index/sec-section/Group 32.png' %}" alt="">
-            </div>
-        </div>
-    </div>
+    </section>
 
-    <div class="w-full h-[60vh] flex flex-col justify-start items-center bg-radial-[at_25%_25%] from-sky-800 to-sky-950 to-75%">
-        <div class="w-8/10 h-[35vh] p-6 flex justify-evenly items-center">
-            <div class="w-full h-7/10 flex justify-center items-center grid grid-cols-[1fr_1fr_1fr] ">
-                <div class="h-full flex justify-center items-start">
-                    <p class="text-3xl text-white inter_Bold">Check Our Site</p>
-                </div>
-                <div class="flex flex-col h-full gap-4 w-full justify-start items-center">
-                    <div class="w-2/5">
-                        <p class="text-3xl text-white inter_Bold">Pages</p>
+    <section class="mt-10 grid w-[96%] max-w-[1500px] gap-8 xl:grid-cols-[0.92fr_1.08fr]">
+        <div class="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
+            <div class="border-b border-slate-100 px-6 py-5 md:px-8">
+                <p class="text-xs uppercase tracking-[0.3em] text-sky-800">Why E-Vote</p>
+                <h2 class="mt-3 inter_Bold text-4xl text-slate-900">Switch to a faster and more accountable election experience.</h2>
+            </div>
+            <div class="p-4 md:p-8">
+                <img class="w-full rounded-[28px] object-cover shadow-lg shadow-slate-200/70" src="{% static 'Image/Index/sec-section/Section img.png' %}" alt="Digital election illustration">
+            </div>
+        </div>
+
+        <div class="grid gap-6">
+            <div class="rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/60 md:p-8">
+                <p class="text-xs uppercase tracking-[0.3em] text-sky-800">Key Benefits</p>
+                <div class="mt-5 grid gap-4 md:grid-cols-2">
+                    <div class="rounded-[24px] bg-slate-50 p-5">
+                        <p class="inter_Bold text-xl text-slate-900">Professional & Policy-Level</p>
+                        <ul class="mt-4 space-y-3 text-sm leading-7 text-slate-600">
+                            <li>Digital voting can improve election efficiency while keeping oversight stronger and more structured.</li>
+                            <li>Well-designed platforms can support accountability and reinforce confidence in democratic processes.</li>
+                        </ul>
                     </div>
-                    <ul class="text-white list-disc poppins_extralight text-xl">
+                    <div class="rounded-[24px] bg-sky-50 p-5">
+                        <p class="inter_Bold text-xl text-slate-900">Security-Focused</p>
+                        <ul class="mt-4 space-y-3 text-sm leading-7 text-slate-600">
+                            <li>Identity verification and protected access help reduce misuse during the election process.</li>
+                            <li>Centralized digital workflows can make sensitive election operations easier to monitor and protect.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-[1fr_0.9fr]">
+                <div class="rounded-[32px] bg-linear-to-br from-slate-950 via-sky-950 to-sky-900 p-8 text-white shadow-xl shadow-sky-950/15">
+                    <p class="text-xs uppercase tracking-[0.3em] text-sky-100/70">Election Date</p>
+                    <p class="mt-4 poppins_extralight text-2xl">We Are Waiting For You</p>
+                    <p class="mt-3 inter_Bold text-5xl text-cyan-300">May 25</p>
+                    <p class="mt-4 max-w-md text-sm leading-7 text-sky-50/80">
+                        Be part of a more modern, transparent, and trusted voting experience on election day.
+                    </p>
+                </div>
+
+                <div class="rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/60">
+                    <p class="text-xs uppercase tracking-[0.3em] text-sky-800">Work With Us</p>
+                    <p class="mt-4 inter_Bold text-3xl text-slate-900">Help strengthen digital democracy.</p>
+                    <ul class="mt-5 space-y-3 text-sm leading-7 text-slate-600">
+                        <li>Support better election operations through responsible digital transformation.</li>
+                        <li>Encourage trust, transparency, and efficiency across the national voting ecosystem.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-10 w-[96%] max-w-[1500px] overflow-hidden rounded-[34px] bg-linear-to-br from-slate-950 via-sky-950 to-sky-900 text-white shadow-2xl shadow-sky-950/15">
+        <div class="grid gap-8 px-6 py-8 md:px-10 md:py-10 xl:grid-cols-[0.9fr_1.1fr] xl:items-center">
+            <div class="flex justify-center">
+                <img class="max-h-[360px] w-auto drop-shadow-2xl" src="{% static 'Image/Index/sec-section/Group 32.png' %}" alt="Election collaboration illustration">
+            </div>
+
+            <div class="grid gap-6 lg:grid-cols-[0.9fr_0.7fr_1fr]">
+                <div class="rounded-[28px] border border-white/10 bg-white/10 p-6 backdrop-blur-sm">
+                    <p class="text-xs uppercase tracking-[0.3em] text-sky-100/70">Explore</p>
+                    <p class="mt-4 inter_Bold text-3xl">Check Our Site</p>
+                    <p class="mt-4 text-sm leading-7 text-sky-50/80">
+                        Navigate the platform to learn about the election process, participating parties, and available public resources.
+                    </p>
+                </div>
+
+                <div class="rounded-[28px] border border-white/10 bg-white/10 p-6 backdrop-blur-sm">
+                    <p class="text-xs uppercase tracking-[0.3em] text-sky-100/70">Pages</p>
+                    <ul class="mt-4 space-y-3 text-base text-white/90">
                         <li>Home</li>
                         <li>Election</li>
                         <li>Parties</li>
                         <li>About Us</li>
                     </ul>
-                    <div>
-                        <button class="w-[200px] p-3 bg-linear-to-r from-sky-950 to-sky-800 text-white text-lg inter_Bold rounded-lg">Election Result</button>
-                    </div>
+                    <button class="mt-6 rounded-2xl bg-white px-5 py-3 text-base text-sky-950 inter_Bold shadow-lg shadow-sky-950/20 transition duration-300 hover:-translate-y-1">
+                        Election Result
+                    </button>
                 </div>
-                <div class="w-full h-full flex flex-col justify-start items-start">
-                    <div class="w-full flex justify-center items-center">
-                        <p class="text-3xl text-white inter_Bold">Contact Us</p>
-                    </div>
-                    <div class="p-4">
-                        <ul class="flex flex-col justify-center items-start">
-                            <li class="text-base text-white inter_SemiBold"><span class="text-2xl text-white inter_Bold">Office:</span> Africa Avenue near Flamingo Restaurant</li>
-                            <li class="flex justify-center items-start gap-2">
-                                <span class="text-2xl text-white inter_Bold">Phone:</span>
-                                <div class="text-base text-white inter_SemiBold">
-                                    <p>+2519****89</p>
-                                    <p>+2519****89</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="p-2">
-                        <p class="text-base text-white inter_SemiBold"><span class="text-2xl text-white inter_Bold">Fax:</span>(+251)11-5510025</p>
-                        <p class="text-base text-white inter_SemiBold"><span class="text-2xl text-white inter_Bold">Email:</span>contact@nebe.org.et</p>
+
+                <div class="rounded-[28px] border border-white/10 bg-white/10 p-6 backdrop-blur-sm">
+                    <p class="text-xs uppercase tracking-[0.3em] text-sky-100/70">Contact Us</p>
+                    <div class="mt-4 space-y-4 text-sm leading-7 text-white/85">
+                        <p><span class="inter_Bold text-white">Office:</span> Africa Avenue near Flamingo Restaurant</p>
+                        <p><span class="inter_Bold text-white">Phone:</span> +2519****89 / +2519****89</p>
+                        <p><span class="inter_Bold text-white">Fax:</span> (+251)11-5510025</p>
+                        <p><span class="inter_Bold text-white">Email:</span> contact@nebe.org.et</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="w-full h-[25vh] flex justify-center items-end pb-6">
-            <div class="w-full h-4/10 bg-white"></div>
-        </div>
-    </div>
+    </section>
 </div>
 {% endblock %}

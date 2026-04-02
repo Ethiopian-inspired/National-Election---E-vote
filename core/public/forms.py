@@ -96,7 +96,16 @@ class Comptition_request(forms.ModelForm):
     
     class Meta:
         model = Comptition_Request_model
-        fields = "__all__"
+        fields = [
+            "party_logo",
+            "party_nik_name",
+            "party_FullName",
+            "party_chairman_name",
+            "want_lead",
+            "party_info_PDF",
+            "party_discription",
+        ]
+        label = ''
         
         widgets = {
             'party_nik_name': forms.TextInput(attrs={
