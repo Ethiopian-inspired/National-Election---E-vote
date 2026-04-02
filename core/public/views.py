@@ -206,3 +206,16 @@ def party_publish (request):
     }
 
     return render (request, 'public/Pages/Party publish/Party_publish.html', context)
+
+def vote_page (request):
+
+    vote_status = Comptition_Request_model.objects.filter(
+        status = Comptition_Request_model.APPROVED,
+        publish_status = Comptition_Request_model.PUBLISH
+    )
+
+    context = {
+        'vote' : vote_status
+    }
+
+    return render (request, 'public/Vote/vote.html', context)

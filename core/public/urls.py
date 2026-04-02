@@ -11,7 +11,8 @@ from .views import (
     acceptanc_token_page,
     user_token,
     publish_check,
-    party_publish
+    party_publish,
+    vote_page
 )
 
 from django.conf import settings
