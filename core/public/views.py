@@ -80,7 +80,7 @@ def compition_request (request):
             return redirect ('Index')
     else:
         form = Comptition_request ()
-        
+
     context = {
         'Comptition' : form
     }
@@ -132,10 +132,10 @@ def approve_page (request, id):
         return redirect ('Index')
     
     approve_token.status = Comptition_Request_model.APPROVED
-    approve_token.save()
+    approve_token.save(update_fields=["status"])
     
     Approvement_Token.objects.create(
-        user=request.user,
+        user=approve_token.user,
         request=approve_token,
         expired_at=timezone.now() + timedelta(hours=24)
     )

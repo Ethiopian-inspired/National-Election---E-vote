@@ -75,7 +75,7 @@ class Comptition_Request_model (models.Model):
     party_logo = models.ImageField (upload_to='Parties_logo/')
 
     def __str__(self):
-        return 'ID:' + str(self.id) + ' ' + self.party_nik_name
+        return f"{self.party_nik_name} (ID:{self.id})"
     
 
 class Approvement_Token(models.Model):
