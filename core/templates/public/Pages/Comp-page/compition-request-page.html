@@ -1,66 +1,141 @@
 {% extends "public/base.html" %}
 {% load static %}
 
+{% block title %} EVNP - Election Request {% endblock %}
+
 {% block NavCenter %}
-<div class="flex justify-center items-center">
-    <div class="inter_Bold">
-        <p class="text-2xl">Election</p>
-        <p>Request Pages</p>
+<div class="flex items-center gap-4 rounded-[24px] border border-slate-200 bg-white px-5 py-3 shadow-sm">
+    <div class="inter_Bold text-right">
+        <p class="text-xs uppercase tracking-[0.26em] text-slate-500">Election</p>
+        <p class="text-2xl text-slate-900">Request Page</p>
     </div>
-    <hr class="rotate-90 w-[50px] border-1">
+    <div class="h-12 w-px bg-slate-200"></div>
     <div class="inter_Bold">
-        <p class="text-2xl">Give Your Informaion</p>
-        <p class="text-4xl">As a Party</p>
+        <p class="text-xs uppercase tracking-[0.26em] text-slate-500">Submission</p>
+        <p class="text-2xl text-slate-900">Party Information</p>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-<div class="h-[90vh] flex flex-col justify-end items-center">
-    <div class="w-[98%] h-[90vh] flex justify-center items-center">
-        <div class="w-full">
-            <div class="w-full flex justify-center items-center">
-                <p class="text-4xl inter_Bold">Send your Request Fully</p>
+<section class="mx-auto flex min-h-[88vh] w-[96%] max-w-[1550px] items-center py-8">
+    <div class="grid w-full overflow-hidden rounded-[34px] border border-slate-200 bg-white shadow-2xl shadow-slate-200/70 xl:grid-cols-[0.9fr_1.1fr]">
+        <div class="relative overflow-hidden bg-linear-to-br from-slate-950 via-sky-950 to-cyan-700 px-8 py-10 text-white md:px-12 md:py-14">
+            <div class="pointer-events-none absolute left-[-50px] top-[12%] h-44 w-44 rounded-full bg-cyan-300/10 blur-3xl"></div>
+            <div class="pointer-events-none absolute bottom-[-70px] right-[-20px] h-60 w-60 rounded-full bg-white/10 blur-3xl"></div>
+
+            <div class="relative flex h-full flex-col justify-between gap-10">
+                <div>
+                    <div class="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.3em] text-sky-100 backdrop-blur-sm">
+                        Party Registration
+                    </div>
+                    <h1 class="mt-6 inter_Bold text-4xl leading-tight md:text-5xl">Submit your election request with complete party information.</h1>
+                    <p class="mt-5 max-w-xl text-sm leading-8 text-sky-50/80 md:text-base">
+                        Provide your party identity, leadership information, supporting documents, and description so your request can be reviewed clearly and efficiently.
+                    </p>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-3">
+                    <div class="rounded-[24px] border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-xs uppercase tracking-[0.24em] text-sky-100/70">Step 1</p>
+                        <p class="mt-3 inter_Bold text-xl">Add party details</p>
+                    </div>
+                    <div class="rounded-[24px] border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-xs uppercase tracking-[0.24em] text-sky-100/70">Step 2</p>
+                        <p class="mt-3 inter_Bold text-xl">Upload supporting files</p>
+                    </div>
+                    <div class="rounded-[24px] border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-xs uppercase tracking-[0.24em] text-sky-100/70">Step 3</p>
+                        <p class="mt-3 inter_Bold text-xl">Send for review</p>
+                    </div>
+                </div>
+
+                <div class="rounded-[28px] border border-white/10 bg-slate-950/20 p-6">
+                    <p class="text-xs uppercase tracking-[0.28em] text-sky-100/70">Before You Submit</p>
+                    <ul class="mt-4 space-y-3 text-sm leading-7 text-sky-50/80">
+                        <li>Make sure your party logo is clear and official.</li>
+                        <li>Upload party information as a PDF document.</li>
+                        <li>Review all text fields before sending the request.</li>
+                    </ul>
+                </div>
             </div>
+        </div>
 
-            <div class="w-full">
-                <form method="post" enctype="multipart/form-data" class="w-full flex justify-center items-start gap-10 p-10 inter_Bold">
+        <div class="bg-slate-50 px-6 py-8 md:px-10 md:py-12">
+            <div class="mx-auto flex max-w-[760px] flex-col gap-8">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.3em] text-sky-800">Application Form</p>
+                    <h2 class="mt-3 inter_Bold text-4xl text-slate-900">Send your request fully</h2>
+                    <p class="mt-3 text-sm leading-7 text-slate-500">
+                        Fill out the form carefully so your party request can be reviewed with complete and accurate information.
+                    </p>
+                </div>
+
+                {% if Comptition.errors %}
+                    <div class="rounded-[24px] border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700 shadow-sm">
+                        <p class="inter_Bold">Please fix the highlighted fields before submitting your request.</p>
+                        {{ Comptition.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <form method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
                     {% csrf_token %}
-                    <div class="w-[50%] flex flex-col gap-2">
-                        <div class="pt-2">
-                            <p class="pl-4 text-xl">Upload Your Party Logo</p>
-                            {{ Comptition.party_logo }}
-                        </div>
-                        
-                        <div class="w-full flex justify-center items-center gap-4">
+
+                    <div class="rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm">
+                        <label class="mb-3 block text-xs uppercase tracking-[0.24em] text-slate-500">Party Logo</label>
+                        {{ Comptition.party_logo }}
+                        {{ Comptition.party_logo.errors }}
+                    </div>
+
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div class="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm">
+                            <label class="mb-3 block text-xs uppercase tracking-[0.24em] text-slate-500">Party Nickname</label>
                             {{ Comptition.party_nik_name }}
+                            {{ Comptition.party_nik_name.errors }}
+                        </div>
+                        <div class="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm">
+                            <label class="mb-3 block text-xs uppercase tracking-[0.24em] text-slate-500">Party Full Name</label>
                             {{ Comptition.party_FullName }}
-                        </div>
-
-                        <div>
-                            {{ Comptition.party_chairman_name }}
-                        </div>
-
-                        <div>
-                            {{ Comptition.want_lead }}
-                        </div>
-
-                        <div class="pt-2">
-                            <p class="pl-4 text-xl">Upload Your Party Informaion By PDF</p>
-                            {{ Comptition.party_info_PDF }}
+                            {{ Comptition.party_FullName.errors }}
                         </div>
                     </div>
 
-                    <div class="w-[50%] flex flex-col gap-4">
-                        <div>
-                            {{ Comptition.party_discription }}
+                    <div class="grid gap-4 md:grid-cols-[1fr_0.7fr]">
+                        <div class="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm">
+                            <label class="mb-3 block text-xs uppercase tracking-[0.24em] text-slate-500">Chairman Name</label>
+                            {{ Comptition.party_chairman_name }}
+                            {{ Comptition.party_chairman_name.errors }}
                         </div>
+                        <div class="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm">
+                            <label class="mb-3 block text-xs uppercase tracking-[0.24em] text-slate-500">Leadership Intent</label>
+                            {{ Comptition.want_lead }}
+                            {{ Comptition.want_lead.errors }}
+                        </div>
+                    </div>
 
-                        <button type="submit" class="w-[25%] bg-sky-50 p-4 text-2xl text-dark rounded-lg inter_Bold hover:bg-green-600 hover:border-blue-400 hover:text-white hover:scale-[1.02] transition duration-300 cursor-pointer">Send Request</button>
+                    <div class="rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm">
+                        <label class="mb-3 block text-xs uppercase tracking-[0.24em] text-slate-500">Party Information PDF</label>
+                        {{ Comptition.party_info_PDF }}
+                        {{ Comptition.party_info_PDF.errors }}
+                    </div>
+
+                    <div class="rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm">
+                        <label class="mb-3 block text-xs uppercase tracking-[0.24em] text-slate-500">Party Description</label>
+                        {{ Comptition.party_discription }}
+                        {{ Comptition.party_discription.errors }}
+                    </div>
+
+                    <div class="flex flex-col gap-4 pt-2 md:flex-row md:items-center md:justify-between">
+                        <p class="max-w-xl text-xs leading-6 text-slate-500">
+                            Your submission will be reviewed after all required information and documents are received.
+                        </p>
+                        <button type="submit" class="rounded-2xl bg-linear-to-r from-sky-950 to-sky-800 px-8 py-4 text-lg text-white inter_Bold shadow-lg shadow-sky-200/80 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+                            Send Request
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}

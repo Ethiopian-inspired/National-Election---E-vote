@@ -71,14 +71,16 @@ def logout_request (request):
 
 def compition_request (request):
 
-    form = Comptition_request (request.POST, request.FILES)
-
     if request.method == 'POST':
+        form = Comptition_request (request.POST, request.FILES)
+
         if form.is_valid ():
             form.save()
             messages.success (request, "Your Information is deliverd!!")
             return redirect ('Index')
-    
+    else:
+        form = Comptition_request ()
+        
     context = {
         'Comptition' : form
     }
