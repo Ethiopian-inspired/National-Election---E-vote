@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="w-full h-1/10 flex justify-center items-start">
-            <button class="w-[200px] p-4 bg-linear-to-r from-sky-950 to-sky-800 text-white text-3xl inter_Bold rounded-lg shadow-md">Vote</button>
+            <a href="{% url 'Vote_Page' request.user.username %}"><button class="w-[200px] p-4 bg-linear-to-r from-sky-950 to-sky-800 text-white text-3xl inter_Bold rounded-lg shadow-md">Vote</button></a>
         </div>
         <div class="w-full h-1/10 text-white/20 flex justify-center items-center gap-10">
             <p>Terms of use</p>

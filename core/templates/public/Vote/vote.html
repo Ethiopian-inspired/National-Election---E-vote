@@ -8,7 +8,18 @@
 {% endblock %}
 
 {% block content %}
-<div>
-    
-</div>
+    {% if not is_staff %}
+        {% for votes in vote %}
+            <div>
+                <div>
+                    <img src="{{ votes.party_logo.url }}" alt="">
+                </div>
+
+                <div>
+                    <p>{{ votes.party_FullName }}</p>
+                    <p>{{ votes.party_chairman_name }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

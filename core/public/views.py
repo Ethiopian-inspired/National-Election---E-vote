@@ -207,7 +207,7 @@ def party_publish (request):
 
     return render (request, 'public/Pages/Party publish/Party_publish.html', context)
 
-def vote_page (request):
+def vote_page (request, username):
 
     vote_status = Comptition_Request_model.objects.filter(
         status = Comptition_Request_model.APPROVED,
