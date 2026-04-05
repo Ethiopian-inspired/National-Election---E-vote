@@ -111,9 +111,11 @@
 
                                 <div class="flex items-center justify-between gap-4">
                                     <div class="text-xs uppercase tracking-[0.26em] text-slate-400">Review Profile</div>
-                                    <a href="{% url 'Review_Vote' request.user.id %}"><button type="button" class="cursor-default rounded-full bg-slate-900 px-5 py-3 text-sm inter_Bold text-white shadow-lg shadow-slate-300/60">
-                                        Review & Vote
-                                    </button></a>
+                                    {% if votes.slug %}
+                                        <a href="{% url 'Review_Vote' votes.slug %}"><button type="button" class="cursor-default rounded-full bg-slate-900 px-5 py-3 text-sm inter_Bold text-white shadow-lg shadow-slate-300/60">
+                                            Review & Vote
+                                        </button></a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </article>
