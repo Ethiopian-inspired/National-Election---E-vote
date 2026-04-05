@@ -12,7 +12,8 @@ from .views import (
     user_token,
     publish_check,
     party_publish,
-    vote_page
+    vote_page,
+    review_vote
 )
 
 from django.conf import settings
@@ -32,7 +33,8 @@ urlpatterns = [
     path ('user_token/<int:id>/', user_token, name='User_Token'),
     path ('published/<int:id>/', publish_check, name="Publish_check"),
     path ('post_party', party_publish, name='Post_party'),
-    path ('vote_page/<str:username>/', vote_page, name='Vote_Page'),
+    path ('vote_page/<int:id>/', vote_page, name='Vote_Page'),
+    path ('review_vote/<int:id>/', review_vote, name='Review_Vote'),
     path (
         'passowrd-reset/',
         auth_views.PasswordResetView.as_view(

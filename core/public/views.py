@@ -212,7 +212,7 @@ def party_publish (request):
 
     return render (request, 'public/Pages/Party publish/Party_publish.html', context)
 
-def vote_page (request, username):
+def vote_page (request, id):
 
     vote_status = Comptition_Request_model.objects.filter(
         status = Comptition_Request_model.APPROVED,
@@ -224,3 +224,14 @@ def vote_page (request, username):
     }
 
     return render (request, 'public/Vote/vote.html', context)
+
+
+def review_vote (request, id):
+    
+    data = get_object_or_404(Comptition_Request_model, id=id)
+
+    context = {
+        'data' : data
+    }
+
+    return render (request, 'public/Vote/Review_and_vote/review_and_vote.html', context)
