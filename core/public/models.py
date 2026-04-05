@@ -8,6 +8,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 from datetime import timedelta
+from django.utils.text import slugify
 
 import uuid
 
@@ -67,6 +68,8 @@ class Comptition_Request_model (models.Model):
         default=UNPUBLISH
     )
 
+    user = models.ForeignKey (User, on_delete=models.CASCADE)
+
     party_nik_name = models.CharField (max_length=5)
     party_FullName = models.CharField (max_length=55)
 
@@ -78,8 +81,16 @@ class Comptition_Request_model (models.Model):
     party_info_PDF = models.FileField (upload_to='Parties/PDF/')
     party_logo = models.ImageField (upload_to='Parties_logo/')
 
+    slug = models.SlugField (unique=True, null=True, blank=True)
+
     def __str__(self):
         return f"{self.party_nik_name} (ID:{self.id})"
+    
+    # ----------------------> converts the party_FullName into a URL-safe slug
+    def save (self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.party_FullName)
+        super().save(*args, **kwargs)
     
 
 class Approvement_Token(models.Model):
