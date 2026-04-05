@@ -2,13 +2,136 @@
 {% load static %}
 
 {% block NavCenter %}
-<div>
-    <p>Review And Vote</p>
+<div class="rounded-full border border-amber-100 bg-amber-50 px-5 py-2 shadow-sm">
+    <p class="inter_Bold text-sm uppercase tracking-[0.35em] text-amber-900">Review And Vote</p>
 </div>
 {% endblock %}
 
 {% block content %}
-<div>
-    
-</div>
+<section class="mx-auto flex w-[96%] max-w-[1450px] flex-col gap-8 pb-10 pt-4 lg:gap-10">
+    <div class="overflow-hidden rounded-[34px] bg-linear-to-br from-slate-950 via-sky-950 to-cyan-800 text-white shadow-2xl shadow-slate-950/15">
+        <div class="grid gap-8 px-6 py-8 md:px-10 md:py-10 xl:grid-cols-[1.05fr_0.95fr]">
+            <div class="relative flex flex-col gap-6">
+                <div class="absolute left-[-50px] top-[-30px] h-36 w-36 rounded-full bg-cyan-300/10 blur-3xl"></div>
+                <div class="absolute bottom-[-85px] right-[6%] h-52 w-52 rounded-full bg-white/10 blur-3xl"></div>
+
+                <div class="relative flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.28em] text-sky-100/90">
+                    <span class="rounded-full border border-white/15 bg-white/10 px-4 py-2">Ballot Review</span>
+                    <span class="rounded-full border border-emerald-300/30 bg-emerald-400/15 px-4 py-2 text-emerald-50">Published Party</span>
+                </div>
+
+                <div class="relative max-w-3xl">
+                    <h1 class="inter_Bold text-4xl leading-tight md:text-5xl">Confirm the party details before making your final selection.</h1>
+                    <p class="mt-4 max-w-2xl text-sm leading-7 text-sky-50/85 md:text-base">
+                        Review the official party identity, chairman information, and published description below. This screen is designed to help voters make a calm and informed decision.
+                    </p>
+                </div>
+
+                <div class="relative grid gap-4 sm:grid-cols-3">
+                    <div class="rounded-[24px] border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-xs uppercase tracking-[0.25em] text-sky-100/70">Party</p>
+                        <p class="mt-3 inter_Bold text-lg">{{ user_data.party_nik_name }}</p>
+                    </div>
+                    <div class="rounded-[24px] border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-xs uppercase tracking-[0.25em] text-sky-100/70">Chairman</p>
+                        <p class="mt-3 inter_Bold text-lg">{{ user_data.party_chairman_name }}</p>
+                    </div>
+                    <div class="rounded-[24px] border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-xs uppercase tracking-[0.25em] text-sky-100/70">Status</p>
+                        <p class="mt-3 inter_Bold text-lg text-emerald-100">Eligible</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative flex min-h-[320px] items-center justify-center overflow-hidden rounded-[30px] border border-white/10 bg-white/10 p-8 backdrop-blur-md">
+                <div class="absolute bottom-[-40px] left-[-20px] h-44 w-44 rounded-full bg-cyan-400/10 blur-3xl"></div>
+                <div class="absolute right-6 top-6 rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-sky-50">
+                    Official Logo
+                </div>
+
+                <div class="relative flex h-[220px] w-[220px] items-center justify-center rounded-[32px] border border-white/15 bg-white/10 p-6 shadow-lg shadow-slate-950/20 backdrop-blur-sm">
+                    <img class="max-h-full w-auto object-contain" src="{{ user_data.party_logo.url }}" alt="{{ user_data.party_FullName }} logo">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
+        <article class="rounded-[30px] border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/60 md:p-8">
+            <div class="flex flex-col gap-6">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.28em] text-slate-400">Published Party Profile</p>
+                    <h2 class="mt-3 inter_Bold text-3xl leading-tight text-slate-900">{{ user_data.party_FullName }}</h2>
+                    <p class="mt-3 text-sm leading-7 text-slate-500">
+                        {{ user_data.party_discription }}
+                    </p>
+                </div>
+
+                <div class="grid gap-4 md:grid-cols-2">
+                    <div class="rounded-[24px] bg-slate-50 p-5">
+                        <p class="text-xs uppercase tracking-[0.25em] text-slate-400">Chairman</p>
+                        <p class="mt-3 inter_Bold text-xl text-slate-900">{{ user_data.party_chairman_name }}</p>
+                    </div>
+                    <div class="rounded-[24px] bg-slate-50 p-5">
+                        <p class="text-xs uppercase tracking-[0.25em] text-slate-400">Leadership Region</p>
+                        <p class="mt-3 inter_Bold text-xl text-slate-900">{{ user_data.want_lead }}</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="{{ user_data.party_info_PDF.url }}" target="_blank" rel="noopener noreferrer" class="inter_Bold rounded-full border border-slate-300 px-5 py-3 text-sm text-slate-800 transition duration-300 hover:border-slate-900 hover:bg-slate-900 hover:text-white">
+                        Open Party PDF
+                    </a>
+                    <a href="{% url 'Index' %}" class="inter_Bold rounded-full bg-slate-100 px-5 py-3 text-sm text-slate-700 transition duration-300 hover:bg-slate-200 hover:text-slate-950">
+                        Back to Parties
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <aside class="flex flex-col gap-5">
+            {% if request.user == user_data.user %}
+                <div class="relative overflow-hidden rounded-[30px] border border-red-200 bg-linear-to-br from-red-50 via-white to-amber-50 p-6 shadow-sm shadow-red-100/80">
+                    <div class="absolute right-[-20px] top-[-20px] h-28 w-28 rounded-full bg-red-100/80 blur-2xl"></div>
+                    <div class="relative">
+                        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-red-600 text-xl text-white shadow-lg shadow-red-200/80">
+                            !
+                        </div>
+                        <p class="mt-5 text-xs uppercase tracking-[0.28em] text-red-500">Voting Restricted</p>
+                        <h3 class="mt-3 inter_Bold text-2xl leading-tight text-slate-900">You cannot vote for your own party.</h3>
+                        <p class="mt-3 text-sm leading-7 text-slate-600">
+                            This party is linked to your account, so the platform keeps the ballot fair by disabling self-voting on this page.
+                        </p>
+                        <div class="mt-5 rounded-[22px] border border-red-100 bg-white/80 px-4 py-4 text-sm leading-7 text-slate-600">
+                            Review the published information if needed, then return to the party list to continue with another eligible option.
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="rounded-[30px] border border-emerald-200 bg-linear-to-br from-emerald-50 via-white to-sky-50 p-6 shadow-sm shadow-emerald-100/70">
+                    <p class="text-xs uppercase tracking-[0.28em] text-emerald-600">Eligible Selection</p>
+                    <h3 class="mt-3 inter_Bold text-2xl leading-tight text-slate-900">This party can move to the final voting step.</h3>
+                    <p class="mt-3 text-sm leading-7 text-slate-600">
+                        The party is published and not tied to your account, so it is ready for the next part of the voting flow when that action is connected.
+                    </p>
+                    <button type="button" class="mt-6 w-full cursor-default rounded-[22px] bg-slate-900 px-5 py-4 text-sm inter_Bold text-white shadow-lg shadow-slate-300/60">
+                        Vote Action Ready
+                    </button>
+                </div>
+            {% endif %}
+
+            <div class="rounded-[30px] border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/60">
+                <p class="text-xs uppercase tracking-[0.28em] text-slate-400">Quick Reminder</p>
+                <div class="mt-4 space-y-3 text-sm leading-7 text-slate-600">
+                    <div class="rounded-[20px] bg-slate-50 px-4 py-4">
+                        Match the logo, full party name, and chairman before continuing.
+                    </div>
+                    <div class="rounded-[20px] bg-slate-50 px-4 py-4">
+                        Review the attached PDF if you want the official published party information.
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>
 {% endblock %}
