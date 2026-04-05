@@ -68,6 +68,8 @@ class Comptition_Request_model (models.Model):
         default=UNPUBLISH
     )
 
+    user = models.ForeignKey (User, on_delete=models.CASCADE)
+
     party_nik_name = models.CharField (max_length=5)
     party_FullName = models.CharField (max_length=55)
 
