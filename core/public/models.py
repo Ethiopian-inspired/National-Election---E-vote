@@ -119,3 +119,13 @@ class Approvement_Token(models.Model):
 
     def __str__(self):
         return 'ID:_' + str(self.id) + '____|Name:_' + str(self.user) + '____|Party Own:_' + str(self.request)
+    
+
+class Vote (models.Model):
+
+    user = models.ForeignKey (User, on_delete=models.CASCADE)
+    party = models.ForeignKey (Comptition_Request_model, on_delete=models.CASCADE)
+    created_at = models.DateTimeField (auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} Voted For {self.party}"
