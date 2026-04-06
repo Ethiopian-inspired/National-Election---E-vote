@@ -114,9 +114,12 @@
                     <p class="mt-3 text-sm leading-7 text-slate-600">
                         The party is published and not tied to your account, so it is ready for the next part of the voting flow when that action is connected.
                     </p>
-                    <button type="button" class="mt-6 w-full cursor-default rounded-[22px] bg-slate-900 px-5 py-4 text-sm inter_Bold text-white shadow-lg shadow-slate-300/60">
-                        Vote Action Ready
-                    </button>
+                    <form method="POST" action="{% url 'Vote_success' party.slug %}">
+                        {% csrf_token %}
+                        <button type="submit" class="mt-6 w-full cursor-default rounded-[22px] bg-slate-900 px-5 py-4 text-sm inter_Bold text-white shadow-lg shadow-slate-300/60">
+                            Vote Action Ready
+                        </button>
+                    </form>
                 </div>
             {% endif %}
 

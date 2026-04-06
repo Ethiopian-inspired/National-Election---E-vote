@@ -238,30 +238,29 @@ def review_vote (request, slug):
     return render (request, 'public/Vote/Review_and_vote/review_and_vote.html', context)
 
 
-def main_vote_logic (request, slug):
+def main_vote_logic(request, slug):
 
-    party = get_object_or_404 (Comptition_Request_model, slug=slug)
+    party = get_object_or_404(Comptition_Request_model, slug=slug)
 
-    # Check request is_authenticated
+    # Check authentication
     if not request.user.is_authenticated:
-        return redirect ("Index")
+        return redirect("Index")
 
-    # Avoid owner can't vote them self
+    # Prevent owner from voting
     if request.user == party.user:
+        messages.error(request, "Can't vote your Party!")
+        return redirect("Vote_Page")
 
-        messages.error (request, "Can't vote your Party!")
-        return redirect ("Vote_Page")
-    
-    # already Voted
-    if request.user == Vote.objects.filter(user=request.user).exists():
-        messages.error (request, "You're Already vote!")
-        return redirect ("Index")
-    
-    #Save Vote
+    # Prevent duplicate vote
+    if Vote.objects.filter(user=request.user, party=party).exists():
+        messages.error(request, "You're already voted!")
+        return redirect("Index")
+
+    # Save vote
     Vote.objects.create(
         user=request.user,
         party=party
     )
-
-    messages.success (request, "Successfully Vote |" f"{party.party_FullName}")
-    return redirect ("Index")
+    
+    messages.success(request, f"Successfully Voted | {party.party_FullName}")
+    return redirect("Index", slug=party.slug)
