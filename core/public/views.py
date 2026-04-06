@@ -15,7 +15,8 @@ from datetime import timedelta
 
 from .models import (
     Comptition_Request_model,
-    Approvement_Token
+    Approvement_Token,
+    Vote
 )
 
 from django.contrib.auth.decorators import user_passes_test
@@ -235,3 +236,32 @@ def review_vote (request, slug):
     }
 
     return render (request, 'public/Vote/Review_and_vote/review_and_vote.html', context)
+
+
+def main_vote_logic (request, slug):
+
+    party = get_object_or_404 (Comptition_Request_model, slug=slug)
+
+    # Check request is_authenticated
+    if not request.user.is_authenticated:
+        return redirect ("Index")
+
+    # Avoid owner can't vote them self
+    if request.user == party.user:
+
+        messages.error (request, "Can't vote your Party!")
+        return redirect ("Vote_Page")
+    
+    # already Voted
+    if request.user == Vote.objects.filter(user=request.user).exists():
+        messages.error (request, "You're Already vote!")
+        return redirect ("Index")
+    
+    #Save Vote
+    Vote.objects.create(
+        user=request.user,
+        party=party
+    )
+
+    messages.success (request, "Successfully Vote |" f"{party.party_FullName}")
+    return redirect ("Index")
