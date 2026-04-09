@@ -13,7 +13,8 @@ from .views import (
     publish_check,
     party_publish,
     vote_page,
-    review_vote
+    review_vote,
+    main_vote_logic
 )
 
 from django.conf import settings
@@ -35,6 +36,7 @@ urlpatterns = [
     path ('post_party', party_publish, name='Post_party'),
     path ('vote_page/', vote_page, name='Vote_Page'),
     path ('review_vote/<slug:slug>/', review_vote, name='Review_Vote'),
+    path ("vote_success/<slug:slug>/", main_vote_logic, name="Vote_success"),
     path (
         'passowrd-reset/',
         auth_views.PasswordResetView.as_view(

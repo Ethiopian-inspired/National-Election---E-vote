@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.http import HttpResponseForbidden
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import timezone
@@ -15,7 +16,8 @@ from datetime import timedelta
 
 from .models import (
     Comptition_Request_model,
-    Approvement_Token
+    Approvement_Token,
+    Vote
 )
 
 from django.contrib.auth.decorators import user_passes_test
@@ -235,3 +237,29 @@ def review_vote (request, slug):
     }
 
     return render (request, 'public/Vote/Review_and_vote/review_and_vote.html', context)
+
+
+@login_required(login_url='/signup/')
+@require_POST
+def main_vote_logic(request, slug):
+
+    party = get_object_or_404(Comptition_Request_model, slug=slug)
+
+    # Prevent owner from voting
+    if request.user == party.user:
+        messages.error(request, "Can't vote your Party!")
+        return redirect("Vote_Page")
+
+    # Prevent duplicate vote
+    if Vote.objects.filter(user=request.user, party=party).exists():
+        messages.error(request, "You're already voted!")
+        return redirect("Index")
+
+    # Save vote
+    Vote.objects.create(
+        user=request.user,
+        party=party
+    )
+
+    messages.success(request, f"Successfully Voted | {party.party_FullName}")
+    return redirect ("Index")
