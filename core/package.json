@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "commonjs",
   "dependencies": {
-    "@tailwindcss/cli": "^4.2.1",
-    "tailwindcss": "^4.2.1"
+    "@tailwindcss/cli": "^4.2.4",
+    "tailwindcss": "^4.2.4"
   },
   "scripts": {
     "watch:css": "tailwindcss -i ./static/src/input.css -o ./static/src/output.css --watch"

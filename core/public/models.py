@@ -42,10 +42,6 @@ class Profile (models.Model):
 
 class Comptition_Request_model (models.Model):
 
-# Party Requester
-
-    user = models.ForeignKey (User, on_delete=models.CASCADE, related_name="party_requests")
-
 # Approvment Choice
     PENDING = 'pending'
     APPROVED = 'approved'
@@ -68,7 +64,7 @@ class Comptition_Request_model (models.Model):
         default=UNPUBLISH
     )
 
-    user = models.ForeignKey (User, on_delete=models.CASCADE)
+    user = models.ForeignKey (Profile.user, on_delete=models.CASCADE)
 
     party_nik_name = models.CharField (max_length=5)
     party_FullName = models.CharField (max_length=55)
