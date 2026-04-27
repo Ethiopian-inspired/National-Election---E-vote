@@ -243,31 +243,52 @@ def review_vote (request, slug):
     return render (request, 'public/Vote/Review_and_vote/review_and_vote.html', context)
 
 
-@login_required(login_url='/signup/')
-@require_POST
-def main_vote_logic(request, slug):
+# @login_required(login_url='/signup/')
+# @require_POST
+# def main_vote_logic(request, slug):
 
-    party = get_object_or_404(Comptition_Request_model, slug=slug)
+#     party = get_object_or_404(Comptition_Request_model, slug=slug)
 
-    # Prevent owner from voting
-    if request.user == party.user:
-        messages.error(request, "Can't vote your Party!")
-        return redirect("Vote_Page")
+#     # Prevent owner from voting
+#     if request.user == party.user:
+#         messages.error(request, "Can't vote your Party!")
+#         return redirect("Vote_Page")
 
-    # Prevent duplicate vote
-    if Vote.objects.filter(user=request.user, party=party).exists():
-        messages.error(request, "You're already voted!")
-        return redirect("Index")
+#     # Prevent duplicate vote
+#     if Vote.objects.filter(user=request.user, party=party).exists():
+#         messages.error(request, "You're already voted!")
+#         return redirect("Index")
 
-    # Save vote
-    Vote.objects.create(
-        user=request.user,
-        party=party
-    )
+#     # Save vote
+#     Vote.objects.create(
+#         user=request.user,
+#         party=party
+#     )
 
-    messages.success(request, f"Successfully Voted | {party.party_FullName}")
-    return redirect ("Index")
+#     messages.success(request, f"Successfully Voted | {party.party_FullName}")
+#     return redirect ("Index")
 
+class VoteAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post (self, request, slug):
+        party = get_object_or_404(Comptition_Request_model, slug=slug)
+
+        # Prevent owner from voting
+        if request.user == party.user:
+            return Response ({"error" : "You're already voted!"}, status=403)
+        
+        # Prevent duplicate vote
+        if Vote.objects.filter(user=request.user, party=party).exists():
+            return Response ({"error" : "You already voted"}, status=401)
+        
+        # Save vote
+        Vote.objects.create (
+            user = request.user,
+            party=party
+        )
+
+        return Response ({"message" : f"Successfully Voted | {party.party_FullName}"})
 
 class TestAPI (APIView):
 
