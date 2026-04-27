@@ -20,6 +20,10 @@ from .models import (
     Vote
 )
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404
 # Create your views here.
@@ -263,3 +267,11 @@ def main_vote_logic(request, slug):
 
     messages.success(request, f"Successfully Voted | {party.party_FullName}")
     return redirect ("Index")
+
+
+class TestAPI (APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get (self, request):
+        return Response ({"message" : "You are authenticated!"})
