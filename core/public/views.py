@@ -20,6 +20,11 @@ from .models import (
     Vote
 )
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404
 # Create your views here.
@@ -238,28 +243,32 @@ def review_vote (request, slug):
 
     return render (request, 'public/Vote/Review_and_vote/review_and_vote.html', context)
 
+class VoteAPIView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
-@login_required(login_url='/signup/')
-@require_POST
-def main_vote_logic(request, slug):
+    def post (self, request, slug):
+        party = get_object_or_404(Comptition_Request_model, slug=slug)
 
-    party = get_object_or_404(Comptition_Request_model, slug=slug)
+        # Prevent owner from voting
+        if request.user == party.user:
+            return Response ({"error" : "You're already voted!"}, status=400)
+        
+        # Prevent duplicate vote
+        if Vote.objects.filter(user=request.user, party=party).exists():
+            return Response ({"error" : "You already voted"}, status=401)
+        
+        # Save vote
+        Vote.objects.create (
+            user = request.user,
+            party=party
+        )
 
-    # Prevent owner from voting
-    if request.user == party.user:
-        messages.error(request, "Can't vote your Party!")
-        return redirect("Vote_Page")
+        return Response ({"message" : f"Successfully Voted | {party.party_FullName}"})
 
-    # Prevent duplicate vote
-    if Vote.objects.filter(user=request.user, party=party).exists():
-        messages.error(request, "You're already voted!")
-        return redirect("Index")
+class TestAPI (APIView):
 
-    # Save vote
-    Vote.objects.create(
-        user=request.user,
-        party=party
-    )
+    permission_classes = [IsAuthenticated]
 
-    messages.success(request, f"Successfully Voted | {party.party_FullName}")
-    return redirect ("Index")
+    def get (self, request):
+        return Response ({"message" : "You are authenticated!"})

@@ -14,12 +14,17 @@ from .views import (
     party_publish,
     vote_page,
     review_vote,
-    main_vote_logic
+    VoteAPIView
 )
 
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView
+)
 
 urlpatterns = [
     path ('', index, name='Index'),
@@ -36,7 +41,11 @@ urlpatterns = [
     path ('post_party', party_publish, name='Post_party'),
     path ('vote_page/', vote_page, name='Vote_Page'),
     path ('review_vote/<slug:slug>/', review_vote, name='Review_Vote'),
-    path ("vote_success/<slug:slug>/", main_vote_logic, name="Vote_success"),
+    path ('api/vote/<slug:slug>/', VoteAPIView.as_view(), name="Vote_success"),
+    path ('api/token/', TokenObtainPairView.as_view(), name='Token_obtain_pair'),
+    path ('api/token/refresh/', TokenRefreshView.as_view(), name='Token_refresh'),
+
+
     path (
         'passowrd-reset/',
         auth_views.PasswordResetView.as_view(
