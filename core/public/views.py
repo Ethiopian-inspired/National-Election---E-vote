@@ -23,6 +23,7 @@ from .models import (
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404
@@ -242,33 +243,8 @@ def review_vote (request, slug):
 
     return render (request, 'public/Vote/Review_and_vote/review_and_vote.html', context)
 
-
-# @login_required(login_url='/signup/')
-# @require_POST
-# def main_vote_logic(request, slug):
-
-#     party = get_object_or_404(Comptition_Request_model, slug=slug)
-
-#     # Prevent owner from voting
-#     if request.user == party.user:
-#         messages.error(request, "Can't vote your Party!")
-#         return redirect("Vote_Page")
-
-#     # Prevent duplicate vote
-#     if Vote.objects.filter(user=request.user, party=party).exists():
-#         messages.error(request, "You're already voted!")
-#         return redirect("Index")
-
-#     # Save vote
-#     Vote.objects.create(
-#         user=request.user,
-#         party=party
-#     )
-
-#     messages.success(request, f"Successfully Voted | {party.party_FullName}")
-#     return redirect ("Index")
-
 class VoteAPIView(APIView):
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def post (self, request, slug):
@@ -276,7 +252,7 @@ class VoteAPIView(APIView):
 
         # Prevent owner from voting
         if request.user == party.user:
-            return Response ({"error" : "You're already voted!"}, status=403)
+            return Response ({"error" : "You're already voted!"}, status=400)
         
         # Prevent duplicate vote
         if Vote.objects.filter(user=request.user, party=party).exists():
