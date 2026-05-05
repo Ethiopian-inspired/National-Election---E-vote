@@ -21,10 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView
-)
+from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path ('', index, name='Index'),
@@ -42,7 +39,7 @@ urlpatterns = [
     path ('vote_page/', vote_page, name='Vote_Page'),
     path ('review_vote/<slug:slug>/', review_vote, name='Review_Vote'),
     path ('api/vote/<slug:slug>/', VoteAPIView.as_view(), name="Vote_success"),
-    path ('api/token/', TokenObtainPairView.as_view(), name='Token_obtain_pair'),
+    path ('api/token/', election, name='Token_obtain_pair'),
     path ('api/token/refresh/', TokenRefreshView.as_view(), name='Token_refresh'),
 
 

@@ -20,10 +20,16 @@ from .models import (
     Vote
 )
 
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework.decorators import permission_classes
+from rest_framework_simplejwt.tokens import RefreshToken
+
+from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
+
 
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404
@@ -35,25 +41,32 @@ def index (request):
         token = Approvement_Token.objects.filter(user=request.user).first()
     return render (request, 'public/Pages/index.html', { 'token' : token })
 
-def election (request):
-    SingInForm = SignIn (request.POST or None)
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def election(request):
 
-    if request.method == 'POST':
-        if SingInForm.is_valid():
+    username = request.data.get('username')
+    password = request.data.get('password')
 
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = authenticate (request, username=username, password=password)
+    # 🔒 Safety check
+    if not username or not password:
+        return Response({'error': 'Username and password required'}, status=400)
 
-            if user is not None:
-                login (request, user)
-                return redirect ('Index')
+    user = authenticate(request, username=username, password=password)
 
-    context = {
-        'signin' : SingInForm
-    }
+    if user is not None:
+        refresh = RefreshToken.for_user(user)
+        access = str(refresh.access_token)
+        refresh_token = str(refresh)
 
-    return render (request, 'public/Pages/SubPages/Election.html', context=context)
+        return Response({
+            'access': access,
+            'refresh': refresh_token,
+            'access_token': access,
+            'refresh_token': refresh_token,
+        })
+
+    return Response({'error': 'Invalid credentials'}, status=401)
 
 def signup (request):
 
