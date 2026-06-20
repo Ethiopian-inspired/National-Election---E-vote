@@ -78,104 +78,185 @@
     {% endif %}
 
     {% block navbar %}
-        <div class="sticky top-0 z-40 w-full bg-white/92 px-4 py-4 backdrop-blur-md">
-            <div class="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 rounded-[28px] border border-slate-200 bg-white px-5 py-4 shadow-lg shadow-slate-200/60">
-                <div class="flex min-w-0 flex-1 items-center gap-4">
-                    <div class="flex items-center gap-3 rounded-full bg-slate-950 px-4 py-3 text-white shadow-md">
-                        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-sm inter_Bold">EV</div>
+        <div class="sticky top-0 z-40 w-full bg-white/92 px-3 py-3 backdrop-blur-md sm:px-4">
+            <div class="mx-auto w-full max-w-[1600px] rounded-[24px] border border-slate-200 bg-white px-3 py-3 shadow-lg shadow-slate-200/60 sm:px-5 lg:rounded-[28px]">
+                <input id="public-navbar-toggle" type="checkbox" class="peer sr-only">
+
+                <div class="flex items-center justify-between gap-3">
+                    <a href="{% url 'Index' %}" class="flex min-w-0 items-center gap-3 rounded-full bg-slate-950 px-3 py-2.5 text-white shadow-md sm:px-4 sm:py-3">
+                        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-sm inter_Bold">EV</div>
                         <div class="min-w-0">
-                            <p class="inter_Bold text-sm uppercase tracking-[0.28em] text-sky-100">Platform</p>
-                            <p class="inter_Bold text-base leading-none">E-Vote National</p>
+                            <p class="inter_Bold text-[11px] uppercase tracking-[0.2em] text-sky-100 sm:text-sm sm:tracking-[0.28em]">Platform</p>
+                            <p class="truncate inter_Bold text-sm leading-none sm:text-base">E-Vote National</p>
                         </div>
-                        <p class="inter_Bold text-sm">v{{ APP_VERSION }}</p>
+                        <p class="hidden shrink-0 text-sm inter_Bold sm:block">v{{ APP_VERSION }}</p>
+                    </a>
+
+                    <div class="hidden flex-1 items-center justify-center lg:flex">
+                        {% block NavCenter %}
+                            <div></div>
+                        {% endblock %}
                     </div>
 
-                    <ul class="flex items-center gap-2 text-sm text-slate-600 inter_Bold">
-                        <li>
-                            <a href="{% url 'Index' %}" class="block rounded-full px-4 py-2 transition duration-300 hover:bg-slate-100 hover:text-slate-950">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'Election' %}" class="block rounded-full px-4 py-2 transition duration-300 hover:bg-slate-100 hover:text-slate-950">
-                                About Us
-                            </a>
-                        </li>
-                        <li class="relative group">
-                            <button class="flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-white transition duration-300 hover:bg-sky-900">
-                                <span>Menu</span>
-                                <span class="text-xs">▼</span>
-                            </button>
-
-                            <div class="invisible absolute left-0 top-full z-50 w-52 rounded-[20px] border border-slate-200 bg-white p-2 opacity-0 shadow-xl shadow-slate-200/70 transition duration-200 group-hover:visible group-hover:opacity-100">
-                                {% if request.user.is_authenticated %}
-                                    {% if request.user.is_staff %}
-                                        <a href="{% url 'Admin_Panel' request.user.username %}" class="block rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-sky-50 hover:text-sky-900">
-                                            Admin Panel
-                                        </a>
-                                    {% endif %}
-                                {% endif %}
-                                
-                                {% if request.user.is_authenticated %}
-                                    {% if not request.user.is_staff %}
-                                        <a href="{% url 'Compition_Request' %}" class="block rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-sky-50 hover:text-sky-900">
-                                            Election Contest
-                                        </a>
-                                    {% endif %}
-                                {% endif %}
-
-                                <a href="{% url 'Election' %}" class="block rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-slate-50 hover:text-slate-950">
-                                    Election
+                    <div class="hidden min-w-0 flex-1 items-center justify-end gap-4 lg:flex">
+                        <ul class="flex items-center gap-2 text-sm text-slate-600 inter_Bold">
+                            <li>
+                                <a href="{% url 'Index' %}" class="block rounded-full px-4 py-2 transition duration-300 hover:bg-slate-100 hover:text-slate-950">
+                                    Home
                                 </a>
-
-                                <a href="{% url 'Election' %}" class="block rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-slate-50 hover:text-slate-950">
-                                    Parties
+                            </li>
+                            <li>
+                                <a href="{% url 'Election' %}" class="block rounded-full px-4 py-2 transition duration-300 hover:bg-slate-100 hover:text-slate-950">
+                                    About Us
                                 </a>
-                            </div>
-                        </li>
+                            </li>
+                            <li class="relative group">
+                                <button type="button" class="flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-white transition duration-300 hover:bg-sky-900">
+                                    <span>Menu</span>
+                                    <span class="text-xs">▼</span>
+                                </button>
 
-                        {% if not request.user.is_staff %}
-                            {% if user.is_authenticated and token %}
-                                <li>
-                                    <a href="{% url 'User_Token' token.id %}" class="block rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sky-900 transition duration-300 hover:bg-sky-100">
-                                        PT Token
+                                <div class="invisible absolute left-0 top-full z-50 w-52 rounded-[20px] border border-slate-200 bg-white p-2 opacity-0 shadow-xl shadow-slate-200/70 transition duration-200 group-hover:visible group-hover:opacity-100">
+                                    {% if request.user.is_authenticated %}
+                                        {% if request.user.is_staff %}
+                                            <a href="{% url 'Admin_Panel' request.user.username %}" class="block rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-sky-50 hover:text-sky-900">
+                                                Admin Panel
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    {% if request.user.is_authenticated %}
+                                        {% if not request.user.is_staff %}
+                                            <a href="{% url 'Compition_Request' %}" class="block rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-sky-50 hover:text-sky-900">
+                                                Election Contest
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <a href="{% url 'Election' %}" class="block rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-slate-50 hover:text-slate-950">
+                                        Election
                                     </a>
-                                </li>
+
+                                    <a href="{% url 'Election' %}" class="block rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-slate-50 hover:text-slate-950">
+                                        Parties
+                                    </a>
+                                </div>
+                            </li>
+
+                            {% if not request.user.is_staff %}
+                                {% if user.is_authenticated and token %}
+                                    <li>
+                                        <a href="{% url 'User_Token' token.id %}" class="block rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sky-900 transition duration-300 hover:bg-sky-100">
+                                            PT Token
+                                        </a>
+                                    </li>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    </ul>
-                </div>
+                        </ul>
 
-                <div class="flex flex-shrink-0 items-center justify-center">
-                    {% block NavCenter %}
-                        <div></div>
-                    {% endblock %}
-                </div>
-
-                <div class="flex min-w-0 flex-1 items-center justify-end gap-4">
-                    <div>
                         <button class="rounded-2xl bg-linear-to-r from-sky-950 to-sky-800 px-6 py-3 text-sm text-white inter_Bold shadow-lg shadow-sky-200/80 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl">
                             Election Result
                         </button>
-                    </div>
 
-                    <div class="flex items-center gap-3 rounded-[22px] border border-slate-200 bg-slate-50 px-4 py-3">
-                        {% if user.is_authenticated %}
-                            <div class="flex h-11 w-11 items-center justify-center rounded-full bg-sky-900 text-sm text-white inter_Bold">
-                                {{ request.user.first_name|default:"U"|slice:":1" }}{{ user.last_name|default:"N"|slice:":1" }}
-                            </div>
-                            <div class="min-w-0">
-                                <p class="truncate inter_Bold text-sm text-slate-900">{{ request.user.first_name }} {{ user.last_name }}</p>
-                                <p class="truncate text-xs text-slate-500">Ethiopan, Yeka</p>
-                            </div>
-                            <div>
-                                <a href="{% url 'Logout' %}" class="rounded-full px-3 py-2 text-sm inter_Bold text-slate-600 transition duration-300 hover:bg-white hover:text-slate-950">
+                        <div class="flex min-w-0 items-center gap-3 rounded-[22px] border border-slate-200 bg-slate-50 px-4 py-3">
+                            {% if user.is_authenticated %}
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sky-900 text-sm text-white inter_Bold">
+                                    {{ request.user.first_name|default:"U"|slice:":1" }}{{ user.last_name|default:"N"|slice:":1" }}
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="truncate inter_Bold text-sm text-slate-900">{{ request.user.first_name }} {{ user.last_name }}</p>
+                                    <p class="truncate text-xs text-slate-500">Ethiopan, Yeka</p>
+                                </div>
+                                <a href="{% url 'Logout' %}" class="shrink-0 rounded-full px-3 py-2 text-sm inter_Bold text-slate-600 transition duration-300 hover:bg-white hover:text-slate-950">
                                     Logout
                                 </a>
+                            {% else %}
+                                <p class="inter_Bold text-sm text-slate-700">None Name</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <label for="public-navbar-toggle" class="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-900 transition duration-300 hover:bg-slate-100 lg:hidden" aria-label="Toggle navigation">
+                        <span class="flex w-5 flex-col gap-1.5">
+                            <span class="block h-0.5 w-full rounded-full bg-current"></span>
+                            <span class="block h-0.5 w-full rounded-full bg-current"></span>
+                            <span class="block h-0.5 w-full rounded-full bg-current"></span>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="grid max-h-0 overflow-hidden transition-all duration-300 peer-checked:max-h-[640px] lg:hidden">
+                    <div class="mt-3 border-t border-slate-200 pt-3">
+                        <nav class="grid gap-2 text-sm text-slate-700 inter_Bold">
+                            <a href="{% url 'Index' %}" class="rounded-2xl px-4 py-3 transition duration-300 hover:bg-slate-100 hover:text-slate-950">
+                                Home
+                            </a>
+                            <a href="{% url 'Election' %}" class="rounded-2xl px-4 py-3 transition duration-300 hover:bg-slate-100 hover:text-slate-950">
+                                About Us
+                            </a>
+
+                            <details class="group rounded-2xl bg-slate-50">
+                                <summary class="flex cursor-pointer list-none items-center justify-between rounded-2xl px-4 py-3 text-slate-950">
+                                    <span>Menu</span>
+                                    <span class="text-xs transition duration-300 group-open:rotate-180">▼</span>
+                                </summary>
+                                <div class="grid gap-1 px-2 pb-2">
+                                    {% if request.user.is_authenticated %}
+                                        {% if request.user.is_staff %}
+                                            <a href="{% url 'Admin_Panel' request.user.username %}" class="rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-white hover:text-sky-900">
+                                                Admin Panel
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    {% if request.user.is_authenticated %}
+                                        {% if not request.user.is_staff %}
+                                            <a href="{% url 'Compition_Request' %}" class="rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-white hover:text-sky-900">
+                                                Election Contest
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <a href="{% url 'Election' %}" class="rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-white hover:text-slate-950">
+                                        Election
+                                    </a>
+                                    <a href="{% url 'Election' %}" class="rounded-xl px-4 py-3 text-sm text-slate-700 transition duration-200 hover:bg-white hover:text-slate-950">
+                                        Parties
+                                    </a>
+                                </div>
+                            </details>
+
+                            {% if not request.user.is_staff %}
+                                {% if user.is_authenticated and token %}
+                                    <a href="{% url 'User_Token' token.id %}" class="rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-sky-900 transition duration-300 hover:bg-sky-100">
+                                        PT Token
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </nav>
+
+                        <div class="mt-3 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
+                            <button class="w-full rounded-2xl bg-linear-to-r from-sky-950 to-sky-800 px-5 py-3 text-sm text-white inter_Bold shadow-lg shadow-sky-200/80 transition duration-300 hover:shadow-xl sm:w-auto">
+                                Election Result
+                            </button>
+
+                            <div class="flex min-w-0 items-center gap-3 rounded-[22px] border border-slate-200 bg-slate-50 px-4 py-3">
+                                {% if user.is_authenticated %}
+                                    <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sky-900 text-sm text-white inter_Bold">
+                                        {{ request.user.first_name|default:"U"|slice:":1" }}{{ user.last_name|default:"N"|slice:":1" }}
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <p class="truncate inter_Bold text-sm text-slate-900">{{ request.user.first_name }} {{ user.last_name }}</p>
+                                        <p class="truncate text-xs text-slate-500">Ethiopan, Yeka</p>
+                                    </div>
+                                    <a href="{% url 'Logout' %}" class="shrink-0 rounded-full px-3 py-2 text-sm inter_Bold text-slate-600 transition duration-300 hover:bg-white hover:text-slate-950">
+                                        Logout
+                                    </a>
+                                {% else %}
+                                    <p class="inter_Bold text-sm text-slate-700">None Name</p>
+                                {% endif %}
                             </div>
-                        {% else %}
-                            <p class="inter_Bold text-sm text-slate-700">None Name</p>
-                        {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
