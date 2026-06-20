@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.conf import settings
 # Create your models here.
 
@@ -42,10 +43,6 @@ class Profile (models.Model):
 
 class Comptition_Request_model (models.Model):
 
-# Party Requester
-
-    user = models.ForeignKey (User, on_delete=models.CASCADE, related_name="party_requests")
-
 # Approvment Choice
     PENDING = 'pending'
     APPROVED = 'approved'
@@ -68,7 +65,8 @@ class Comptition_Request_model (models.Model):
         default=UNPUBLISH
     )
 
-    user = models.ForeignKey (User, on_delete=models.CASCADE)
+    User_info = get_user_model()
+    user = models.ForeignKey (User_info, on_delete=models.CASCADE)
 
     party_nik_name = models.CharField (max_length=5)
     party_FullName = models.CharField (max_length=55)

@@ -5,7 +5,6 @@ from .forms import (
     Comptition_request
 )
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -20,17 +19,6 @@ from .models import (
     Vote
 )
 
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework.decorators import permission_classes
-from rest_framework_simplejwt.tokens import RefreshToken
-
-from rest_framework.permissions import AllowAny
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-from rest_framework_simplejwt.authentication import JWTAuthentication
-
-
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404
 # Create your views here.
@@ -41,32 +29,25 @@ def index (request):
         token = Approvement_Token.objects.filter(user=request.user).first()
     return render (request, 'public/Pages/index.html', { 'token' : token })
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def election(request):
+def election (request):
+    SingInForm = SignIn (request.POST or None)
 
-    username = request.data.get('username')
-    password = request.data.get('password')
+    if request.method == 'POST':
+        if SingInForm.is_valid():
 
-    # 🔒 Safety check
-    if not username or not password:
-        return Response({'error': 'Username and password required'}, status=400)
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate (request, username=username, password=password)
 
-    user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login (request, user)
+                return redirect ('Index')
 
-    if user is not None:
-        refresh = RefreshToken.for_user(user)
-        access = str(refresh.access_token)
-        refresh_token = str(refresh)
+    context = {
+        'signin' : SingInForm
+    }
 
-        return Response({
-            'access': access,
-            'refresh': refresh_token,
-            'access_token': access,
-            'refresh_token': refresh_token,
-        })
-
-    return Response({'error': 'Invalid credentials'}, status=401)
+    return render (request, 'public/Pages/SubPages/Election.html', context=context)
 
 def signup (request):
 
@@ -256,32 +237,28 @@ def review_vote (request, slug):
 
     return render (request, 'public/Vote/Review_and_vote/review_and_vote.html', context)
 
-class VoteAPIView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
 
-    def post (self, request, slug):
-        party = get_object_or_404(Comptition_Request_model, slug=slug)
+@login_required(login_url='/signup/')
+@require_POST
+def main_vote_logic(request, slug):
 
-        # Prevent owner from voting
-        if request.user == party.user:
-            return Response ({"error" : "You're already voted!"}, status=400)
-        
-        # Prevent duplicate vote
-        if Vote.objects.filter(user=request.user, party=party).exists():
-            return Response ({"error" : "You already voted"}, status=401)
-        
-        # Save vote
-        Vote.objects.create (
-            user = request.user,
-            party=party
-        )
+    party = get_object_or_404(Comptition_Request_model, slug=slug)
 
-        return Response ({"message" : f"Successfully Voted | {party.party_FullName}"})
+    # Prevent owner from voting
+    if request.user == party.user:
+        messages.error(request, "Can't vote your Party!")
+        return redirect("Vote_Page")
 
-class TestAPI (APIView):
+    # Prevent duplicate vote
+    if Vote.objects.filter(user=request.user, party=party).exists():
+        messages.error(request, "You're already voted!")
+        return redirect("Index")
 
-    permission_classes = [IsAuthenticated]
+    # Save vote
+    Vote.objects.create(
+        user=request.user,
+        party=party
+    )
 
-    def get (self, request):
-        return Response ({"message" : "You are authenticated!"})
+    messages.success(request, f"Successfully Voted | {party.party_FullName}")
+    return redirect ("Index")

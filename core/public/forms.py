@@ -5,9 +5,6 @@ from django.contrib.auth.models import User
 from .models import (
     Comptition_Request_model
 )
-
-from . import models
-
 class SignUp (UserCreationForm):
 
     class Meta:
