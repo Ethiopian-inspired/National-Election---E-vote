@@ -3,17 +3,17 @@ name = "national-election-e-vote"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "AlazarBekele",email = "alazarthe70@gmail.com"}
+    {name = "AlazarBekele", email = "alazarthe70@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.11"
+
 dependencies = [
-    "django (>=6.0.2,<7.0.0)",
+    "django (>=5.2,<6.0)",
     "pillow (>=12.1.1,<13.0.0)",
     "djangorestframework (>=3.17.1,<4.0.0)",
     "djangorestframework-simplejwt (>=5.5.1,<6.0.0)"
 ]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
